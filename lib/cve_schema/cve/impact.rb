@@ -1,5 +1,5 @@
-require 'cve_schema/cve/cvss_v2'
-require 'cve_schema/cve/cvss_v3'
+require 'cve_schema/cve/impact/cvss_v2'
+require 'cve_schema/cve/impact/cvss_v3'
 
 module CVESchema
   class CVE
