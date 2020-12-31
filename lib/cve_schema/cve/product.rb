@@ -1,4 +1,5 @@
 require 'cve_schema/cve/version'
+require 'cve_schema/cve/na'
 
 module CVESchema
   class CVE

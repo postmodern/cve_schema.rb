@@ -1,4 +1,5 @@
 require 'cve_schema/cve/has_lang_value'
+require 'cve_schema/cve/na'
 
 module CVESchema
   class CVE
