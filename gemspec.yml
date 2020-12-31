@@ -1,14 +1,13 @@
 name: cve_schema
-summary: "TODO: Summary"
-description: "TODO: Description"
+summary: Common classes for CVE data
+description: |
+  CVESchema provides common classes for CVE data and loading it from JSON.
 license: MIT
 authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: https://github.com/postmodern/cve_schema#readme
 
+required_ruby_version: ">= 2.0.0"
+
 development_dependencies:
-  bundler: ~> 1.10
-  rake: ~> 10.0
-  rspec: ~> 3.0
-  rubygems-tasks: ~> 0.2
-  yard: ~> 0.8
+  bundler: ~> 2.0
