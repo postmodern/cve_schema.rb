@@ -131,7 +131,7 @@ module CVESchema
               rl: RL[json['RL']],
               rc: RC[json['RC']],
 
-              score: json['SCORE']]
+              score: json['SCORE']
             )
           end
 
