@@ -9,28 +9,34 @@ describe CVESchema::CVE do
     let(:data_version) { :"4.0" }
 
     context "required keywords" do
-      it "should require a data_type: keyword" do
-        expect { 
-          described_class.new(
-            data_format: data_format, data_version: data_version
-          )
-        }.to raise_error(ArgumentError)
+      context "when the data_type: keyword is not given" do
+        it do
+          expect { 
+            described_class.new(
+              data_format: data_format, data_version: data_version
+            )
+          }.to raise_error(ArgumentError)
+        end
       end
 
-      it "should require a data_format: keyword" do
-        expect { 
-          described_class.new(
-            data_type: data_type, data_version: data_version
-          )
-        }.to raise_error(ArgumentError)
+      context "when the data_format: keyword is not given" do
+        it do
+          expect { 
+            described_class.new(
+              data_type: data_type, data_version: data_version
+            )
+          }.to raise_error(ArgumentError)
+        end
       end
 
-      it "should require a data_version: keyword" do
-        expect { 
-          described_class.new(
-            data_type: data_type, data_format: data_format
-          )
-        }.to raise_error(ArgumentError)
+      context "when the data_version: keyword is not given" do
+        it do
+          expect { 
+            described_class.new(
+              data_type: data_type, data_format: data_format
+            )
+          }.to raise_error(ArgumentError)
+        end
       end
     end
 

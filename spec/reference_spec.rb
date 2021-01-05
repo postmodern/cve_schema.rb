@@ -47,15 +47,24 @@ describe CVESchema::CVE::Reference do
     let(:json_node) { json_tree['references']['reference_data'][0] }
 
     context '"refsource":' do
-      it { expect(subject.refsource).to eq(json_node['refsource'].to_sym) }
+      let(:json_value) { json_node['refsource'] }
+      let(:expected)   { json_value.to_sym      }
+
+      it 'must parse the "refsource": value and set #refsource' do
+        expect(subject.refsource).to eq(expected)
+      end
     end
 
     context '"url":' do
-      it { expect(subject.url).to eq(json_node['url']) }
+      it "muset set #url" do
+        expect(subject.url).to eq(json_node['url'])
+      end
     end
 
     context '"name":' do
-      it { expect(subject.name).to eq(json_node['name']) }
+      it "must set #name" do
+        expect(subject.name).to eq(json_node['name'])
+      end
     end
   end
 end

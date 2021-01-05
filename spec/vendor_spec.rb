@@ -44,7 +44,9 @@ describe CVESchema::CVE::Vendor do
     end
 
     context '"vendor_name":' do
-      it { expect(subject.vendor_name).to eq(json_node['vendor_name']) }
+      it "must set #vendor_name" do
+        expect(subject.vendor_name).to eq(json_node['vendor_name'])
+      end
     end
 
     context '"product":' do

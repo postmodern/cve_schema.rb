@@ -59,16 +59,25 @@ describe CVESchema::CVE::Source do
     let(:json_node) { json_tree['source'] }
 
     context '"defect":' do
-      it { expect(subject.defect).to eq(json_node['defect']) }
+      it "must set #defect" do
+        expect(subject.defect).to eq(json_node['defect'])
+      end
     end
 
     context '"discovery":' do
-      it { expect(subject.discovery).to eq(json_node['discovery'].to_sym) }
+      let(:json_value) { json_node['discovery'] }
+      let(:expected)   { json_value.to_sym      }
+
+      it "must set #discovery" do
+        expect(subject.discovery).to eq(expected.to_sym)
+      end
     end
 
     context '"advisory":' do
       pending 'need to find a CVE with the "advisory": key' do
-        it { expect(subject.advisory).to eq(json_node['advisory']) }
+        it "must set #advisory" do
+          expect(subject.advisory).to eq(json_node['advisory'])
+        end
       end
     end
   end

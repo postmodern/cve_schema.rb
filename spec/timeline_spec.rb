@@ -63,15 +63,24 @@ describe CVESchema::CVE::Timeline do
     let(:json_node) { json_tree['timeline'][0] }
 
     context '"time":' do
-      it { expect(subject.time).to be == DateTime.parse(json_node['time']) }
+      let(:json_value) { json_node['time'] }
+      let(:expected)   { CVESchema::CVE::Timestamp.parse(json_value) }
+
+      it 'must parse the "time": value and set #time' do
+        expect(subject.time).to eq(expected)
+      end
     end
 
     context '"lang":' do
-      it { expect(subject.lang).to be == json_node['lang'] }
+      it 'must parse the "lang": value and set #lang' do
+        expect(subject.lang).to eq(json_node['lang'])
+      end
     end
 
     context '"value":' do
-      it { expect(subject.value).to be == json_node['value'] }
+      it 'must parse the "value": value and set #value' do
+        expect(subject.value).to eq(json_node['value'])
+      end
     end
   end
 end

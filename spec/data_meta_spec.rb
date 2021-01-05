@@ -44,8 +44,11 @@ describe CVESchema::CVE::DataMeta do
     let(:json_node) { json_tree['CVE_data_meta'] }
 
     context '"ID":' do
+      let(:json_value) { json_node['ID'] }
+      let(:expected)   { CVESchema::CVE::ID.parse(json_value) }
+
       it 'must parse the "ID": CVE ID and set #id' do
-        expect(subject.id).to eq(CVESchema::CVE::ID.parse(json_node['ID']))
+        expect(subject.id).to eq(expected)
       end
     end
 
@@ -57,9 +60,8 @@ describe CVESchema::CVE::DataMeta do
 
     context '"UPDATED":' do
       pending 'need to find a CVE with the "UPDATED": key' do
-        let(:expected) do
-          CVESchema::CVE::Timestamp.parse(json_node['UPDATED'])
-        end
+        let(:json_value) { json_node['UPDATED'] }
+        let(:expected)   { CVESchema::CVE::Timestamp.parse(json_value) }
 
         it 'must parse the "UPDATED": Timestamp and set #updated' do
           expect(subject.updated).to eq(expected)
@@ -77,9 +79,8 @@ describe CVESchema::CVE::DataMeta do
 
     context '"DATE_REQUESTED":' do
       pending 'need to find a CVE with the "DATE_REQUESTED": key' do
-        let(:expected) do
-          CVESchema::CVE::Timestamp.parse(json_node['DATE_REQUESTED'])
-        end
+        let(:json_value) { json_node['DATE_REQUESTED'] }
+        let(:expected)   { CVESchema::CVE::Timestamp.parse(json_value) }
 
         it 'must parse the "DATE_REQUESTED": Timestamp and set #date_requested' do
           expect(subject.date_requested).to eq(expected)
@@ -89,9 +90,8 @@ describe CVESchema::CVE::DataMeta do
 
     context '"DATE_ASSIGNED":' do
       pending 'need to find a CVE with the "DATE_ASSIGNED": key' do
-        let(:expected) do
-          CVESchema::CVE::Timestamp.parse(json_node['DATE_ASSIGNED'])
-        end
+        let(:json_value) { json_node['DATE_ASSIGNED'] }
+        let(:expected)   { CVESchema::CVE::Timestamp.parse(json_value) }
 
         it 'must parse the "DATE_ASSIGNED": Timestamp and set #date_assigned' do
           expect(subject.date_assigned).to eq(expected)
@@ -100,9 +100,8 @@ describe CVESchema::CVE::DataMeta do
     end
 
     context '"DATE_PUBLIC":' do
-      let(:expected) do
-        CVESchema::CVE::Timestamp.parse(json_node['DATE_PUBLIC'])
-      end
+      let(:json_value) { json_node['DATE_PUBLIC'] }
+      let(:expected)   { CVESchema::CVE::Timestamp.parse(json_value) }
 
       it 'must parse the "DATE_PUBLIC": Timestamp and set #date_public' do
         expect(subject.date_public).to eq(expected)
@@ -110,8 +109,11 @@ describe CVESchema::CVE::DataMeta do
     end
 
     context '"STATE":' do
+      let(:json_value) { json_node['STATE'] }
+      let(:expected)   { json_value.to_sym  }
+
       it 'must parse the "STATE": value and set #state' do
-        expect(subject.state).to eq(json_node['STATE'].to_sym)
+        expect(subject.state).to eq(expected)
       end
     end
 
@@ -131,8 +133,9 @@ describe CVESchema::CVE::DataMeta do
 
     context '"REPLACED_BY":' do
       pending 'need to find a CVE with the "REPLACED_BY": key' do
+        let(:json_value) { json_node['REPLACED_BY'] }
         let(:expected) do
-          json_node['REPLACED_BY'].split(',').map(&CVESchema::CVE::ID.method(:parse))
+          json_value.split(',').map(&CVESchema::CVE::ID.method(:parse))
         end
 
         it 'must parse the "REPLACED_BY": String of IDs and set #replaced_by' do

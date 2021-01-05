@@ -7,7 +7,7 @@ describe CVESchema::CVE::Timestamp do
       let(:timestamp) { '2020-05-13T16:00:00.000Z' }
 
       it "must parse it" do
-        expect(subject.parse(timestamp)).to be == DateTime.parse(timestamp)
+        expect(subject.parse(timestamp)).to eq(DateTime.parse(timestamp))
       end
     end
 

@@ -9,11 +9,11 @@ describe CVESchema::CVE::ID do
     subject { described_class.new(year,number) }
 
     it "must set #year" do
-      expect(subject.year).to be == year
+      expect(subject.year).to eq(year)
     end
 
     it "must set #number" do
-      expect(subject.number).to be == number
+      expect(subject.number).to eq(number)
     end
   end
 
@@ -85,7 +85,7 @@ describe CVESchema::CVE::ID do
 
   describe "#to_s" do
     it "must convert the ID back into a valid CVE string" do
-      expect(subject.to_s).to be == "CVE-#{year}-#{number}"
+      expect(subject.to_s).to eq("CVE-#{year}-#{number}")
     end
   end
 end
