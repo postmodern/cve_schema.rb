@@ -3,34 +3,33 @@ require 'shared_examples'
 require 'cve_schema/cve/product'
 
 describe CVESchema::CVE::Product do
+  let(:product_name) { 'Example' }
+  let(:versions)     { ['1.2.3', '2.0.0'] }
+
   describe "#initialize" do
-    context "required keywords" do
+    describe "required keywords" do
       it "must require a product_name:" do
         expect {
-          described_class.new(versions: ['1.2.3'])
+          described_class.new(versions: versions)
         }.to raise_error(ArgumentError)
       end
     end
 
-    context "when given a product_name: keyword" do
-      let(:product_name) { 'Example' }
-
+    context "when a product_name: keyword is given" do
       subject { described_class.new(product_name: product_name) }
 
       it "must set #product_name" do
         expect(subject.product_name).to eq(product_name)
       end
+    end
 
-      context "when also given a verisons: keyword" do
-        let(:versions) { ['1.2.3', '2.0.0'] }
+    context "when a verisons: keyword is given" do
+      subject do
+        described_class.new(product_name: product_name, versions: versions)
+      end
 
-        subject do
-          described_class.new(product_name: product_name, versions: versions)
-        end
-
-        it "must set #product_name" do
-          expect(subject.versions).to eq(versions)
-        end
+      it "must set #product_name" do
+        expect(subject.versions).to eq(versions)
       end
     end
   end
@@ -43,7 +42,9 @@ describe CVESchema::CVE::Product do
     end
 
     context '"product_name":' do
-      it { expect(subject.product_name).to eq(json_node['product_name']) }
+      it "must set #product_name" do
+        expect(subject.product_name).to eq(json_node['product_name'])
+      end
     end
 
     context '"versions":' do
@@ -53,8 +54,6 @@ describe CVESchema::CVE::Product do
   end
 
   describe "#na?" do
-    let(:versions) { ['1.2.3', '2.0.0'] }
-
     subject do
       described_class.new(product_name: product_name, versions: versions)
     end
