@@ -9,7 +9,7 @@ module CVESchema
       # Adds {ClassMethods} to the class.
       #
       # @param [Class] base
-      #   The class including {self}.
+      #   The class including {HasLangValue}.
       #
       def self.included(base)
         base.extend ClassMethods
