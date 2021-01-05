@@ -8,6 +8,61 @@ describe CVESchema::CVE do
   let(:file) { File.expand_path("../fixtures/#{cve_id}.json",__FILE__) }
   let(:json) { JSON.parse(File.read(file)) }
 
+  describe "#initialize" do
+    let(:data_type)    { :CVE   }
+    let(:data_format)  { :MITRE }
+    let(:data_version) { :"4.0" }
+
+    context "required keywords" do
+      it "should require a data_type: keyword" do
+        expect { 
+          described_class.new(
+            data_format: data_format, data_version: data_version
+          )
+        }.to raise_error(ArgumentError)
+      end
+
+      it "should require a data_format: keyword" do
+        expect { 
+          described_class.new(
+            data_type: data_type, data_version: data_version
+          )
+        }.to raise_error(ArgumentError)
+      end
+
+      it "should require a data_version: keyword" do
+        expect { 
+          described_class.new(
+            data_type: data_type, data_format: data_format
+          )
+        }.to raise_error(ArgumentError)
+      end
+    end
+
+    context "default values" do
+      subject do
+        described_class.new(
+          data_type: data_type,
+          data_format: data_format,
+          data_version: data_version
+        )
+      end
+
+      it { expect(subject.data_meta).to eq(nil)     }
+      it { expect(subject.affects).to eq(nil)       }
+      it { expect(subject.configurations).to eq([]) }
+      it { expect(subject.problemtype).to eq([])    }
+      it { expect(subject.references).to eq([])     }
+      it { expect(subject.description).to eq([])    }
+      it { expect(subject.exploit).to eq([])        }
+      it { expect(subject.credit).to eq([])         }
+      it { expect(subject.impact).to eq(nil)        }
+      it { expect(subject.solution).to eq([])       }
+      it { expect(subject.source).to eq(nil)        }
+      it { expect(subject.work_around).to eq([])    }
+    end
+  end
+
   describe ".from_json" do
     subject { described_class.from_json(json) }
 
