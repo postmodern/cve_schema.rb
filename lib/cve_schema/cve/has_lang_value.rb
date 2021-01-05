@@ -19,6 +19,11 @@ module CVESchema
       # Class methods.
       #
       module ClassMethods
+        LANG = {
+          'en' => :en, # English
+          'es' => :es, # Spanish
+        }
+
         #
         # Loads the objects from the parsed JSON.
         #
@@ -29,7 +34,7 @@ module CVESchema
         #
         def from_json(json)
           new(
-            lang:  json['lang'],
+            lang:  LANG.fetch(json['lang'],json['lang']),
             value: json['value']
           )
         end
@@ -37,7 +42,7 @@ module CVESchema
 
       # Language identifier for {#value}.
       #
-      # @return [String]
+      # @return [:en, :es, String]
       attr_reader :lang
 
       # Text value.
@@ -48,7 +53,7 @@ module CVESchema
       #
       # Initializes {#lang} and {#value}.
       #
-      # @param [String] lang
+      # @param [:en, :es, String] lang
       #
       # @param [String] value
       #

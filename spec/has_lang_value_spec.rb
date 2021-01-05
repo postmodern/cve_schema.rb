@@ -8,7 +8,7 @@ describe CVESchema::CVE::HasLangValue do
     end
   end
 
-  let(:lang)  { 'eng'     }
+  let(:lang)  { :en       }
   let(:value) { 'foo bar' }
 
   describe "#initialize" do
@@ -34,7 +34,7 @@ describe CVESchema::CVE::HasLangValue do
 
     let(:json) do
       {
-        'lang'  => lang,
+        'lang'  => lang.to_s,
         'value' => value
       }
     end
