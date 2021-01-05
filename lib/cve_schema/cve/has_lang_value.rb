@@ -45,6 +45,13 @@ module CVESchema
       # @return [String]
       attr_reader :value
 
+      #
+      # Initializes {#lang} and {#value}.
+      #
+      # @param [String] lang
+      #
+      # @param [String] value
+      #
       def initialize(lang: , value: )
         @lang  = lang
         @value = value
