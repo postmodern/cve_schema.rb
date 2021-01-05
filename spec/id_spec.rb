@@ -45,6 +45,44 @@ describe CVESchema::CVE::ID do
 
   subject { described_class.new(year,number) }
 
+  describe "#==" do
+    context "when given a non-ID object" do
+      let(:other) { Object.new }
+
+      it { expect(subject == other).to be(false) }
+    end
+
+    context "when given another ID object" do
+      context "and the other ID has the same year" do
+        context "but a different number" do
+          let(:other) { described_class.new(year,'0000') }
+
+          it { expect(subject == other).to be(false) }
+        end
+
+        context "and the same number" do
+          let(:other) { described_class.new(year,number) }
+
+          it { expect(subject == other).to be(true) }
+        end
+      end
+
+      context "and the other ID has a different year" do
+        context "but a different number" do
+          let(:other) { described_class.new('3000','0000') }
+
+          it { expect(subject == other).to be(false) }
+        end
+
+        context "and the same number" do
+          let(:other) { described_class.new('3000',number) }
+
+          it { expect(subject == other).to be(false) }
+        end
+      end
+    end
+  end
+
   describe "#to_s" do
     it "must convert the ID back into a valid CVE string" do
       expect(subject.to_s).to be == "CVE-#{year}-#{number}"

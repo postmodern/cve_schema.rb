@@ -49,6 +49,22 @@ module CVESchema
       end
 
       #
+      # Compares the ID with another ID.
+      #
+      # @param [ID] other
+      #   The other ID.
+      #
+      # @return [Boolean]
+      #   Identicates whether the IDs match.
+      #
+      def ==(other)
+        self.class == other.class && (
+          @year   == other.year && 
+          @number == other.number
+        )
+      end
+
+      #
       # Converts the CVE ID back into a String.
       #
       # @return [String]
