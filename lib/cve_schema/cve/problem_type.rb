@@ -8,15 +8,17 @@ module CVESchema
     class ProblemType
 
       # @return [Array<Description>]
-      attr_reader :descriptions
+      attr_reader :description
+
+      alias descriptions description
 
       #
       # Initializes the problem-type object.
       #
-      # @param [Array<Description>] descriptions
+      # @param [Array<Description>] description
       #
-      def initialize(descriptions)
-        @descriptions = descriptions
+      def initialize(description)
+        @description = description
       end
 
       #
