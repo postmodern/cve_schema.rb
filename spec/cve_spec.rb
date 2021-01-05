@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'shared_example'
+require 'shared_examples'
 require 'cve_schema/cve'
 
 describe CVESchema::CVE do
