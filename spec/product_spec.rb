@@ -51,4 +51,24 @@ describe CVESchema::CVE::Product do
       it { expect(subject.versions).to all(be_kind_of(CVESchema::CVE::Version)) }
     end
   end
+
+  describe "#na?" do
+    let(:versions) { ['1.2.3', '2.0.0'] }
+
+    subject do
+      described_class.new(product_name: product_name, versions: versions)
+    end
+
+    context "when value is 'n/a'" do
+      let(:product_name) { 'n/a' }
+
+      it { expect(subject.na?).to be(true) }
+    end
+
+    context "when value is not 'n/a'" do
+      let(:product_name) { 'foo' }
+
+      it { expect(subject.na?).to be(false) }
+    end
+  end
 end
