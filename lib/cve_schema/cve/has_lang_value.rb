@@ -20,8 +20,8 @@ module CVESchema
       #
       module ClassMethods
         LANG = {
-          'en' => :en, # English
-          'es' => :es, # Spanish
+          'eng' => :eng, # English
+          'es'  => :es, # Spanish
         }
 
         #
