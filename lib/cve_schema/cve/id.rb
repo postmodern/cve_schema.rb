@@ -35,10 +35,14 @@ module CVESchema
       # @param [String] id
       #   The CVE ID string.
       #
+      # @raise [ArgumentError]
+      #   The given ID was not a valid CVE.
+      #
       def self.parse(id)
         cve, year, number = id.split('-',3)
 
         unless cve == 'CVE'
+          raise(ArgumentError,"invalid CVE #{id.inspect}")
         end
 
         new(year,number)
