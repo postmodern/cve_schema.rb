@@ -10,6 +10,7 @@ require 'cve_schema/cve/impact'
 require 'cve_schema/cve/solution'
 require 'cve_schema/cve/source'
 require 'cve_schema/cve/work_around'
+require 'cve_schema/cve/timeline'
 
 module CVESchema
   #
@@ -93,6 +94,9 @@ module CVESchema
 
     alias work_arounds work_around
 
+    # @return [Array<Timeline>]
+    attr_reader :timeline
+
     #
     # Initializes the CVE.
     #
@@ -126,6 +130,8 @@ module CVESchema
     #
     # @param [Array<WorkAround>] work_around
     #
+    # @param [Array<Timeline>] timeline
+    #
     def initialize(data_type: , data_format: , data_version: ,
                    data_meta: nil,
                    affects: nil,
@@ -138,7 +144,8 @@ module CVESchema
                    impact: nil,
                    solution: [],
                    source: nil,
-                   work_around: []
+                   work_around: [],
+                   timeline: []
                   )
       @data_type    = data_type
       @data_format  = data_format
@@ -156,6 +163,7 @@ module CVESchema
       @solution = solution
       @source = source
       @work_around = work_around
+      @timeline = timeline
     end
 
     #
@@ -187,7 +195,8 @@ module CVESchema
         impact: json['impact'] && Impact.from_json(json['impact']),
         solution: Array(json['solution']).map(&Solution.method(:from_json)),
         source: json['source'] && Source.from_json(json['source']),
-        work_around: Array(json['work_around']).map(&WorkAround.method(:from_json))
+        work_around: Array(json['work_around']).map(&WorkAround.method(:from_json)),
+        timeline: Array(json['timeline']).map(&Timeline.method(:from_json))
       )
     end
 

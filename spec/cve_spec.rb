@@ -319,5 +319,28 @@ describe CVESchema::CVE do
         end
       end
     end
+
+    context '"timeline":' do
+      context "when present" do
+        describe "#timeline" do
+          pending 'need to find a CVE with "timeline": set' do
+            it { expect(subject.timeline).to be_kind_of(Array) }
+            it { expect(subject.timeline).to_not be_empty      }
+
+            it do
+              expect(subject.timeline).to all(be_kind_of(described_class::Timeline))
+            end
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('timeline') }
+
+        describe "#timeline" do
+          it { expect(subject.timeline).to eq([]) }
+        end
+      end
+    end
   end
 end
