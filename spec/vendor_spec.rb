@@ -54,4 +54,22 @@ describe CVESchema::CVE::Vendor do
       it { expect(subject.product).to all(be_kind_of(CVESchema::CVE::Product)) }
     end
   end
+
+  describe "#na?" do
+    let(:product) { [double(:Product)] }
+
+    subject { described_class.new(vendor_name: vendor_name, product: product) }
+
+    context "when value is 'n/a'" do
+      let(:vendor_name) { 'n/a' }
+
+      it { expect(subject.na?).to be(true) }
+    end
+
+    context "when value is not 'n/a'" do
+      let(:vendor_name) { 'foo' }
+
+      it { expect(subject.na?).to be(false) }
+    end
+  end
 end
