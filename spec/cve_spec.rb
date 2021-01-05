@@ -61,14 +61,12 @@ describe CVESchema::CVE do
   describe ".from_json" do
     include_examples ".from_json"
 
-    subject { described_class.from_json(json) }
-
     it "must return a new CVE object" do
       expect(subject).to be_kind_of(described_class)
     end
 
     context '"data_type":' do
-      let(:json_value) { json['data_type'] }
+      let(:json_value) { json_node['data_type'] }
       let(:expected)   { described_class::DATA_TYPES[json_value] }
 
       it "must convert and set #data_type" do
@@ -77,7 +75,7 @@ describe CVESchema::CVE do
     end
 
     context '"data_format":' do
-      let(:json_value) { json['data_format'] }
+      let(:json_value) { json_node['data_format'] }
       let(:expected)   { described_class::DATA_FORMAT[json_value] }
 
       it "must convert and set #data_format" do
@@ -86,7 +84,7 @@ describe CVESchema::CVE do
     end
 
     context '"data_version":' do
-      let(:json_value) { json['data_version'] }
+      let(:json_value) { json_node['data_version'] }
       let(:expected)   { described_class::DATA_VERSIONS[json_value] }
 
       it "must convert and set #data_version" do
@@ -95,7 +93,7 @@ describe CVESchema::CVE do
     end
 
     context '"data_meta":' do
-      let(:json_value) { json['CVE_data_meta'] }
+      let(:json_value) { json_node['CVE_data_meta'] }
 
       it "must convert the JSON Hash into a DataMeta objects and set #data_meta" do
         expect(subject.data_meta).to be_kind_of(described_class::DataMeta)
@@ -112,7 +110,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('affects') }
+        before { json_node.delete('affects') }
 
         describe "#affects" do
           it { expect(subject.affects).to be_nil }
@@ -126,7 +124,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('configuration') }
+        before { json_node.delete('configuration') }
 
         describe "#configuration" do
           it { expect(subject.configuration).to eq([]) }
@@ -147,7 +145,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('problemtype') }
+        before { json_node.delete('problemtype') }
 
         describe "#problemtype" do
           it { expect(subject.problemtype).to eq([]) }
@@ -168,7 +166,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('references') }
+        before { json_node.delete('references') }
 
         describe "#references" do
           it { expect(subject.references).to eq([]) }
@@ -189,7 +187,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('description') }
+        before { json_node.delete('description') }
 
         describe "#description" do
           it { expect(subject.description).to eq([]) }
@@ -212,7 +210,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('exploit') }
+        before { json_node.delete('exploit') }
 
         describe "#exploit" do
           it { expect(subject.exploit).to eq([]) }
@@ -233,7 +231,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('credit') }
+        before { json_node.delete('credit') }
 
         describe "#credit" do
           it { expect(subject.credit).to eq([]) }
@@ -249,7 +247,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('impact') }
+        before { json_node.delete('impact') }
 
         describe "#impact" do
           it { expect(subject.impact).to be_nil }
@@ -270,7 +268,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('solution') }
+        before { json_node.delete('solution') }
 
         describe "#solution" do
           it { expect(subject.solution).to eq([]) }
@@ -286,7 +284,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('source') }
+        before { json_node.delete('source') }
 
         describe "#source" do
           it { expect(subject.source).to be_nil }
@@ -309,7 +307,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('work_around') }
+        before { json_node.delete('work_around') }
 
         describe "#work_around" do
           it { expect(subject.work_around).to eq([]) }
@@ -332,7 +330,7 @@ describe CVESchema::CVE do
       end
 
       context "when missing" do
-        before { json.delete('timeline') }
+        before { json_node.delete('timeline') }
 
         describe "#timeline" do
           it { expect(subject.timeline).to eq([]) }
