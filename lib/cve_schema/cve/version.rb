@@ -8,7 +8,7 @@ module CVESchema
     class Version
 
       # @return [String]
-      attr_reader :value_value
+      attr_reader :version_value
 
       VERSION_AFFECTED = {
         '='   => :"=",  # affects version_value
