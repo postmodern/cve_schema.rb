@@ -150,6 +150,8 @@ module CVESchema
       @problemtype = problemtype
       @references = references
       @description = description
+      @exploit = exploit
+      @credit = credit
       @impact = impact
       @solution = solution
       @source = source
