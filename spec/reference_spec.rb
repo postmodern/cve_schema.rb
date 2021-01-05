@@ -18,6 +18,8 @@ describe CVESchema::CVE::Reference do
       end
     end
 
+    subject { described_class.new(url: url) }
+
     it "must set #url" do
       expect(subject.url).to be(url)
     end
