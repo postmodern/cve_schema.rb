@@ -1,13 +1,8 @@
 require 'spec_helper'
+require 'shared_example'
 require 'cve_schema/cve'
 
-require 'json'
-
 describe CVESchema::CVE do
-  let(:cve_id) { 'CVE-2020-1994' }
-  let(:file) { File.expand_path("../fixtures/#{cve_id}.json",__FILE__) }
-  let(:json) { JSON.parse(File.read(file)) }
-
   describe "#initialize" do
     let(:data_type)    { :CVE   }
     let(:data_format)  { :MITRE }
@@ -64,6 +59,8 @@ describe CVESchema::CVE do
   end
 
   describe ".from_json" do
+    include_examples ".from_json"
+
     subject { described_class.from_json(json) }
 
     it "must return a new CVE object" do
