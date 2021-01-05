@@ -42,8 +42,8 @@ describe CVESchema::CVE do
     context "default values" do
       subject do
         described_class.new(
-          data_type: data_type,
-          data_format: data_format,
+          data_type:    data_type,
+          data_format:  data_format,
           data_version: data_version
         )
       end
