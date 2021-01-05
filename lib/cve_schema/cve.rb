@@ -146,6 +146,7 @@ module CVESchema
 
       @data_meta = data_meta
       @affects   = affects
+      @configuration = configuration
       @problemtype = problemtype
       @references = references
       @description = description
