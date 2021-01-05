@@ -73,7 +73,7 @@ module CVESchema
       #
       # Converts the version into a String.
       #
-      # @param [String]
+      # @return [String]
       #   The {#version_value} and additionally the {#version_affected}.
       #
       def to_s
