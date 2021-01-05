@@ -3,10 +3,10 @@ require 'shared_examples'
 require 'cve_schema/cve/vendor'
 
 describe CVESchema::CVE::Vendor do
-  describe "#initialize" do
-    let(:vendor_name) { 'Example Co' }
-    let(:product)     { [double(:Product)] }
+  let(:vendor_name) { 'Example Co' }
+  let(:product)     { [double(:Product)] }
 
+  describe "#initialize" do
     describe "required keywords" do
       context "when vendor_name: is not given" do
         it do
@@ -56,8 +56,6 @@ describe CVESchema::CVE::Vendor do
   end
 
   describe "#na?" do
-    let(:product) { [double(:Product)] }
-
     subject { described_class.new(vendor_name: vendor_name, product: product) }
 
     context "when value is 'n/a'" do
