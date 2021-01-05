@@ -45,7 +45,7 @@ module CVESchema
       def self.from_json(json)
         new(
           product_name: json['product_name'],
-          versions:     Array(json['versions']).map(&Version.method(:from_json))
+          versions:     Array(json['version']['version_data']).map(&Version.method(:from_json))
         )
       end
 
