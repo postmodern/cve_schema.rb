@@ -126,7 +126,7 @@ module CVESchema
           id:       ID.parse(json['ID']),
           assigner: json['ASSIGNER'],
 
-          updated: json['UPDATED_AT'] && Timestamp.parse(json['UPDATED_AT']),
+          updated: json['UPDATED'] && Timestamp.parse(json['UPDATED']),
           serial:  json['SERIAL'],
           date_requested: json['DATE_REQUESTED'] && Timestamp.parse(json['DATE_REQUESTED']),
           date_assigned: json['DATE_ASSIGNED'] && Timestamp.parse(json['DATE_ASSIGNED']),
