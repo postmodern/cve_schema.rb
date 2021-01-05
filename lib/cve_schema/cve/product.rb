@@ -16,7 +16,9 @@ module CVESchema
       # The list of affected versions.
       #
       # @return [Array<Version>]
-      attr_reader :versions
+      attr_reader :version
+
+      alias versions version
 
       #
       # Initializes the product.
@@ -25,9 +27,9 @@ module CVESchema
       #
       # @param [Array<Version>] versions
       #
-      def initialize(product_name: , versions: [])
+      def initialize(product_name: , version: [])
         @product_name = product_name
-        @versions     = versions
+        @version      = version
       end
 
       def na?
@@ -45,7 +47,7 @@ module CVESchema
       def self.from_json(json)
         new(
           product_name: json['product_name'],
-          versions:     Array(json['version']['version_data']).map(&Version.method(:from_json))
+          version:      Array(json['version']['version_data']).map(&Version.method(:from_json))
         )
       end
 

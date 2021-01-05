@@ -4,13 +4,13 @@ require 'cve_schema/cve/product'
 
 describe CVESchema::CVE::Product do
   let(:product_name) { 'Example' }
-  let(:versions)     { ['1.2.3', '2.0.0'] }
+  let(:version)     { ['1.2.3', '2.0.0'] }
 
   describe "#initialize" do
     describe "required keywords" do
       it "must require a product_name:" do
         expect {
-          described_class.new(versions: versions)
+          described_class.new(version: version)
         }.to raise_error(ArgumentError)
       end
     end
@@ -25,11 +25,11 @@ describe CVESchema::CVE::Product do
 
     context "when a verisons: keyword is given" do
       subject do
-        described_class.new(product_name: product_name, versions: versions)
+        described_class.new(product_name: product_name, version: version)
       end
 
       it "must set #product_name" do
-        expect(subject.versions).to eq(versions)
+        expect(subject.version).to eq(version)
       end
     end
   end
@@ -47,15 +47,15 @@ describe CVESchema::CVE::Product do
       end
     end
 
-    context '"versions":' do
-      it { expect(subject.versions).to_not be_empty }
-      it { expect(subject.versions).to all(be_kind_of(CVESchema::CVE::Version)) }
+    context '"version":' do
+      it { expect(subject.version).to_not be_empty }
+      it { expect(subject.version).to all(be_kind_of(CVESchema::CVE::Version)) }
     end
   end
 
   describe "#na?" do
     subject do
-      described_class.new(product_name: product_name, versions: versions)
+      described_class.new(product_name: product_name, version: version)
     end
 
     context "when value is 'n/a'" do
