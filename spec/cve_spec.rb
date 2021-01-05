@@ -1,0 +1,268 @@
+require 'spec_helper'
+require 'cve_schema/cve'
+
+require 'json'
+
+describe CVESchema::CVE do
+  let(:cve_id) { 'CVE-2020-1994' }
+  let(:file) { File.expand_path("../fixtures/#{cve_id}.json",__FILE__) }
+  let(:json) { JSON.parse(File.read(file)) }
+
+  describe ".from_json" do
+    subject { described_class.from_json(json) }
+
+    it "must return a new CVE object" do
+      expect(subject).to be_kind_of(described_class)
+    end
+
+    context '"data_type":' do
+      let(:json_value) { json['data_type'] }
+      let(:expected)   { described_class::DATA_TYPES[json_value] }
+
+      it "must convert and set #data_type" do
+        expect(subject.data_type).to eq(expected)
+      end
+    end
+
+    context '"data_format":' do
+      let(:json_value) { json['data_format'] }
+      let(:expected)   { described_class::DATA_FORMAT[json_value] }
+
+      it "must convert and set #data_format" do
+        expect(subject.data_format).to eq(expected)
+      end
+    end
+
+    context '"data_version":' do
+      let(:json_value) { json['data_version'] }
+      let(:expected)   { described_class::DATA_VERSIONS[json_value] }
+
+      it "must convert and set #data_version" do
+        expect(subject.data_version).to eq(expected)
+      end
+    end
+
+    context '"data_meta":' do
+      let(:json_value) { json['CVE_data_meta'] }
+
+      it "must convert the JSON Hash into a DataMeta objects and set #data_meta" do
+        expect(subject.data_meta).to be_kind_of(described_class::DataMeta)
+      end
+    end
+
+    context '"affects":' do
+      context "when present" do
+        describe "#affects" do
+          it do
+            expect(subject.affects).to be_kind_of(described_class::Affects)
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('affects') }
+
+        describe "#affects" do
+          it { expect(subject.affects).to be_nil }
+        end
+      end
+    end
+
+    context '"configuration":' do
+      context "when present" do
+        pending 'need an example CVE with "configuration": set'
+      end
+
+      context "when missing" do
+        before { json.delete('configuration') }
+
+        describe "#configuration" do
+          it { expect(subject.configuration).to eq([]) }
+        end
+      end
+    end
+
+    context '"problemtype":' do
+      context "when present" do
+        describe "#problemtype" do
+          it { expect(subject.problemtype).to be_kind_of(Array) }
+          it { expect(subject.problemtype).to_not be_empty      }
+
+          it do
+            expect(subject.problemtype).to all(be_kind_of(described_class::ProblemType))
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('problemtype') }
+
+        describe "#problemtype" do
+          it { expect(subject.problemtype).to eq([]) }
+        end
+      end
+    end
+
+    context '"references":' do
+      context "when present" do
+        describe "#references" do
+          it { expect(subject.references).to be_kind_of(Array) }
+          it { expect(subject.references).to_not be_empty      }
+
+          it do
+            expect(subject.references).to all(be_kind_of(described_class::Reference))
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('references') }
+
+        describe "#references" do
+          it { expect(subject.references).to eq([]) }
+        end
+      end
+    end
+
+    context '"description":' do
+      context "when present" do
+        describe "#description" do
+          it { expect(subject.description).to be_kind_of(Array) }
+          it { expect(subject.description).to_not be_empty      }
+
+          it do
+            expect(subject.description).to all(be_kind_of(described_class::Description))
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('description') }
+
+        describe "#description" do
+          it { expect(subject.description).to eq([]) }
+        end
+      end
+    end
+
+    context '"exploit":' do
+      context "when present" do
+        pending 'need to find an example CVE with an "exploit":' do
+          describe "#exploit" do
+            it { expect(subject.exploit).to be_kind_of(Array) }
+            it { expect(subject.exploit).to_not be_empty      }
+
+            it do
+              expect(subject.exploit).to all(be_kind_of(described_class::Exploit))
+            end
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('exploit') }
+
+        describe "#exploit" do
+          it { expect(subject.exploit).to eq([]) }
+        end
+      end
+    end
+
+    context '"credit":' do
+      context "when present" do
+        describe "#credit" do
+          it { expect(subject.credit).to be_kind_of(Array) }
+          it { expect(subject.credit).to_not be_empty      }
+
+          it do
+            expect(subject.credit).to all(be_kind_of(described_class::Credit))
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('credit') }
+
+        describe "#credit" do
+          it { expect(subject.credit).to eq([]) }
+        end
+      end
+    end
+
+    context '"impact":' do
+      context "when present" do
+        describe "#impact" do
+          it { expect(subject.impact).to be_kind_of(described_class::Impact) }
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('impact') }
+
+        describe "#impact" do
+          it { expect(subject.impact).to be_nil }
+        end
+      end
+    end
+
+    context '"solution":' do
+      context "when present" do
+        describe "#solution" do
+          it { expect(subject.solution).to be_kind_of(Array) }
+          it { expect(subject.solution).to_not be_empty      }
+
+          it do
+            expect(subject.solution).to all(be_kind_of(described_class::Solution))
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('solution') }
+
+        describe "#solution" do
+          it { expect(subject.solution).to eq([]) }
+        end
+      end
+    end
+
+    context '"source":' do
+      context "when present" do
+        describe "#source" do
+          it { expect(subject.source).to be_kind_of(described_class::Source) }
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('source') }
+
+        describe "#source" do
+          it { expect(subject.source).to be_nil }
+        end
+      end
+    end
+
+    context '"work_around":' do
+      context "when present" do
+        describe "#work_around" do
+          pending 'need to find a CVE with "work_around": set' do
+            it { expect(subject.work_around).to be_kind_of(Array) }
+            it { expect(subject.work_around).to_not be_empty      }
+
+            it do
+              expect(subject.work_around).to all(be_kind_of(described_class::WorkAround))
+            end
+          end
+        end
+      end
+
+      context "when missing" do
+        before { json.delete('work_around') }
+
+        describe "#work_around" do
+          it { expect(subject.work_around).to eq([]) }
+        end
+      end
+    end
+  end
+end
