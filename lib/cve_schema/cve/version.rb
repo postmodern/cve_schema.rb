@@ -1,5 +1,8 @@
 module CVESchema
   class CVE
+    #
+    # Represents an element within the `"version_data"` JSON Array.
+    #
     class Version
 
       # @return [String]
@@ -28,13 +31,25 @@ module CVESchema
 
       # @return [nil, String]
       attr_reader :version_name
-      
+
+      #
+      # Initializes the version.
+      #
+      # @param [String] version_value
+      #
+      # @param [String, nil] version_name
+      #
+      # @param [nil, :'=', :'<', :'>', :'<=', , :'>=', :'!', :'!<', :'!>', :'!<=', :'!>=', :'?', :'?<', :'?>', :'?<=', :'?>='] version_affected
+      #   The version comparison operator. See {VERSION_AFFECTED}.
+      #
       def initialize(version_value: , version_name: nil, version_affected: nil)
         @version_value    = version_value
         @version_name     = version_name
         @version_affected = version_affected
       end
 
+      #
+      # Loads the version object from parsed JSON.
       #
       # @param [Hash{String => String}] json
       #
@@ -53,6 +68,12 @@ module CVESchema
         @version_value == NA
       end
 
+      #
+      # Converts the version into a String.
+      #
+      # @param [String]
+      #   The {#version_value} and additionally the {#version_affected}.
+      #
       def to_s
         if @version_affected
           "#{@version_affected} #{@version_value}"
