@@ -15,9 +15,15 @@ describe CVESchema::CVE::Timestamp do
       let(:timestamp) { '2021-01-05 00:35:14 -0800' }
 
       it do
-        expect {
-          subject.parse(timestamp)
-        }.to raise_error(Date::Error)
+        if RUBY_VERSION < '2.7'
+          expect {
+            subject.parse(timestamp)
+          }.to raise_error(ArgumentError)
+        else
+          expect {
+            subject.parse(timestamp)
+          }.to raise_error(Date::Error)
+        end
       end
     end
   end
