@@ -214,6 +214,15 @@ module CVESchema
         # @return [EM, nil]
         attr_reader :em
 
+        #
+        # Initializes the CVSSv2.
+        #
+        # @param [BM, nil] bm
+        #
+        # @param [TM, nil] tm
+        #
+        # @param [EM, nil] em
+        #
         def initialize(bm: nil, tm: nil, em: nil)
           @bm = bm
           @tm = tm
