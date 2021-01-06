@@ -125,8 +125,16 @@ describe CVESchema::CVE do
     end
 
     context '"configuration":' do
+      let(:cve_id) { 'CVE-2020-2005' }
+
       context "when present" do
-        pending 'need an example CVE with "configuration": set'
+        describe "#configuration" do
+          it { expect(subject.configuration).to be_kind_of(Array) }
+          it { expect(subject.configuration).to_not be_empty }
+          it do
+            expect(subject.configuration).to all(be_kind_of(described_class::Configuration))
+          end
+        end
       end
 
       context "when missing" do
@@ -299,15 +307,15 @@ describe CVESchema::CVE do
     end
 
     context '"work_around":' do
+      let(:cve_id) { 'CVE-2020-2005' }
+
       context "when present" do
         describe "#work_around" do
-          pending 'need to find a CVE with "work_around": set' do
-            it { expect(subject.work_around).to be_kind_of(Array) }
-            it { expect(subject.work_around).to_not be_empty      }
+          it { expect(subject.work_around).to be_kind_of(Array) }
+          it { expect(subject.work_around).to_not be_empty      }
 
-            it do
-              expect(subject.work_around).to all(be_kind_of(described_class::WorkAround))
-            end
+          it do
+            expect(subject.work_around).to all(be_kind_of(described_class::WorkAround))
           end
         end
       end
@@ -322,15 +330,15 @@ describe CVESchema::CVE do
     end
 
     context '"timeline":' do
+      let(:cve_id) { 'CVE-2020-2005' }
+
       context "when present" do
         describe "#timeline" do
-          pending 'need to find a CVE with "timeline": set' do
-            it { expect(subject.timeline).to be_kind_of(Array) }
-            it { expect(subject.timeline).to_not be_empty      }
+          it { expect(subject.timeline).to be_kind_of(Array) }
+          it { expect(subject.timeline).to_not be_empty      }
 
-            it do
-              expect(subject.timeline).to all(be_kind_of(described_class::Timeline))
-            end
+          it do
+            expect(subject.timeline).to all(be_kind_of(described_class::Timeline))
           end
         end
       end
