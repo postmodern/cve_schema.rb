@@ -210,15 +210,15 @@ describe CVESchema::CVE do
     end
 
     context '"exploit":' do
-      context "when present" do
-        pending 'need to find an example CVE with an "exploit":' do
-          describe "#exploit" do
-            it { expect(subject.exploit).to be_kind_of(Array) }
-            it { expect(subject.exploit).to_not be_empty      }
+      let(:cve_id) { 'CVE-2020-2050' }
 
-            it do
-              expect(subject.exploit).to all(be_kind_of(described_class::Exploit))
-            end
+      context "when present" do
+        describe "#exploit" do
+          it { expect(subject.exploit).to be_kind_of(Array) }
+          it { expect(subject.exploit).to_not be_empty      }
+
+          it do
+            expect(subject.exploit).to all(be_kind_of(described_class::Exploit))
           end
         end
       end
