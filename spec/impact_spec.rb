@@ -32,14 +32,14 @@ describe CVESchema::CVE::Impact do
 
     context '"cvssv2":' do
       pending 'need to find a CVE with a "cvssv2": key' do
-        it { expect(subject.cvss_v2).to be_kind_of(described_class::CVSSv2) }
+        it { expect(subject.cvssv2).to be_kind_of(described_class::CVSSv2) }
       end
     end
 
     context '"cvssv3":' do
-      pending 'need to find a CVE with a "cvssv3": key' do
-        it { expect(subject.cvss_v3).to be_kind_of(described_class::CVSSv3) }
-      end
+      let(:cve_id) { 'CVE-2020-4700' }
+
+      it { expect(subject.cvssv3).to be_kind_of(described_class::CVSSv3) }
     end
   end
 end
