@@ -28,7 +28,7 @@ module CVESchema
       def self.from_json(json)
         new(
           cvssv2: json['cvssv2'] && CVSSv2.from_json(json['cvssv2']),
-          cvssv3: json['cvssv3'] && CVSSv3.from_json(json['cvssv3']),
+          cvssv3: json['cvssv3'] && CVSSv3.from_json(json['cvssv3'])
         )
       end
 
