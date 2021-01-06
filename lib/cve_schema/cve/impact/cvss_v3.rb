@@ -275,10 +275,32 @@ module CVESchema
         # @return [EM, nil]
         attr_reader :em
 
+        #
+        # Initializes the CVSSv2.
+        #
+        # @param [BM, nil] bm
+        #
+        # @param [TM, nil] tm
+        #
+        # @param [EM, nil] em
+        #
         def initialize(bm: nil, tm: nil, em: nil)
+          @bm = bm
+          @tm = tm
+          @em = em
         end
 
+        #
+        # @param [Hash{String => Object}] json
+        #
+        # @return [CVSSv2]
+        #
         def self.from_json(json)
+          new(
+            bm: json['BM'] && BM.from_json(json['BM']),
+            tm: json['TM'] && TM.from_json(json['TM']),
+            em: json['EM'] && EM.from_json(json['EM'])
+          )
         end
 
       end
