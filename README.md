@@ -31,7 +31,7 @@
 
 ## Copyright
 
-Copyright (c) 2020 Hal Brodigan
+Copyright (c) 2020-2021 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
