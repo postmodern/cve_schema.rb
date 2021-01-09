@@ -25,7 +25,7 @@ module CVESchema
       #
       # @param [String] product_name
       #
-      # @param [Array<Version>] versions
+      # @param [Array<Version>] version
       #
       def initialize(product_name: , version: [])
         @product_name = product_name
