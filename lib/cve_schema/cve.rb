@@ -133,8 +133,7 @@ module CVESchema
     #
     # @param [Array<Timeline>] timeline
     #
-    def initialize(data_type: , data_format: , data_version: ,
-                   data_meta: nil,
+    def initialize(data_type: , data_format: , data_version: , data_meta: ,
                    affects: nil,
                    configuration: [],
                    problemtype: [],
@@ -195,7 +194,11 @@ module CVESchema
                         raise(InvalidJSON,"unknown \"data_version\": #{json['data_version'].inspect}")
                       end,
 
-        data_meta: DataMeta.from_json(json['CVE_data_meta']),
+        data_meta: begin
+                     DataMeta.from_json(json.fetch('CVE_data_meta'))
+                   rescue KeyError
+                     raise(InvalidJSON,"missing \"CVE_data_meta\" key")
+                   end,
 
         affects:   json['affects'] && Affects.from_json(json['affects']),
         configuration: Array(json['configuration']).map(&Configuration.method(:from_json)),

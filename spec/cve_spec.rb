@@ -7,13 +7,16 @@ describe CVESchema::CVE do
     let(:data_type)    { :CVE   }
     let(:data_format)  { :MITRE }
     let(:data_version) { :"4.0" }
+    let(:data_meta)    { double(:DataMeta) }
 
     context "required keywords" do
       context "when the data_type: keyword is not given" do
         it do
           expect { 
             described_class.new(
-              data_format: data_format, data_version: data_version
+              data_format:  data_format,
+              data_version: data_version,
+              data_meta:    data_meta
             )
           }.to raise_error(ArgumentError)
         end
@@ -23,7 +26,9 @@ describe CVESchema::CVE do
         it do
           expect { 
             described_class.new(
-              data_type: data_type, data_version: data_version
+              data_type:    data_type,
+              data_version: data_version,
+              data_meta:    data_meta
             )
           }.to raise_error(ArgumentError)
         end
@@ -33,7 +38,21 @@ describe CVESchema::CVE do
         it do
           expect { 
             described_class.new(
-              data_type: data_type, data_format: data_format
+              data_type:   data_type,
+              data_format: data_format,
+              data_meta:   data_meta
+            )
+          }.to raise_error(ArgumentError)
+        end
+      end
+
+      context "when the data_meta: keyword is not given" do
+        it do
+          expect { 
+            described_class.new(
+              data_type:    data_type,
+              data_format:  data_format,
+              data_version: data_version,
             )
           }.to raise_error(ArgumentError)
         end
@@ -45,11 +64,11 @@ describe CVESchema::CVE do
         described_class.new(
           data_type:    data_type,
           data_format:  data_format,
-          data_version: data_version
+          data_version: data_version,
+          data_meta:    data_meta
         )
       end
 
-      it { expect(subject.data_meta).to eq(nil)     }
       it { expect(subject.affects).to eq(nil)       }
       it { expect(subject.configurations).to eq([]) }
       it { expect(subject.problemtype).to eq([])    }
