@@ -104,7 +104,7 @@ describe CVESchema::CVE do
         it do
           expect {
             described_class.from_json(json_node)
-          }.to raise_error(described_class::InvalidJSON)
+          }.to raise_error(described_class::MissingJSONKey)
         end
       end
     end
@@ -123,7 +123,7 @@ describe CVESchema::CVE do
         it do
           expect {
             described_class.from_json(json_node)
-          }.to raise_error(described_class::InvalidJSON)
+          }.to raise_error(described_class::MissingJSONKey)
         end
       end
     end
@@ -142,7 +142,7 @@ describe CVESchema::CVE do
         it do
           expect {
             described_class.from_json(json_node)
-          }.to raise_error(described_class::InvalidJSON)
+          }.to raise_error(described_class::MissingJSONKey)
         end
       end
     end
@@ -160,7 +160,7 @@ describe CVESchema::CVE do
         it do
           expect {
             described_class.from_json(json_node)
-          }.to raise_error(described_class::InvalidJSON)
+          }.to raise_error(described_class::MissingJSONKey)
         end
       end
     end

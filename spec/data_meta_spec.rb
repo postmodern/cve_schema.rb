@@ -57,7 +57,7 @@ describe CVESchema::CVE::DataMeta do
         it do
           expect {
             described_class.from_json(json_node)
-          }.to raise_error(CVESchema::CVE::InvalidJSON)
+          }.to raise_error(CVESchema::CVE::MissingJSONKey)
         end
       end
     end
@@ -73,7 +73,7 @@ describe CVESchema::CVE::DataMeta do
         it do
           expect {
             described_class.from_json(json_node)
-          }.to raise_error(CVESchema::CVE::InvalidJSON)
+          }.to raise_error(CVESchema::CVE::MissingJSONKey)
         end
       end
     end

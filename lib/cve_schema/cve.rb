@@ -176,28 +176,40 @@ module CVESchema
     #
     def self.from_json(json)
       new(
-        data_type:    begin
-                        DATA_TYPES.fetch(json['data_type'])
-                      rescue KeyError
-                        raise(InvalidJSON,"unknown \"data_type\": #{json['data_type'].inspect}")
+        data_type:    if (data_type = json['data_type'])
+                        begin
+                          DATA_TYPES.fetch(data_type)
+                        rescue KeyError
+                          raise(UnknownJSONValue,'data_type',data_type)
+                        end
+                      else
+                        raise(MissingJSONKey,'data_type')
                       end,
 
-        data_format:  begin
-                        DATA_FORMAT.fetch(json['data_format'])
-                      rescue KeyError
-                        raise(InvalidJSON,"unknown \"data_format\": #{json['data_format'].inspect}")
+        data_format:  if (data_format = json['data_format'])
+                        begin
+                          DATA_FORMAT.fetch(data_format)
+                        rescue KeyError
+                          raise(UnknownJSONValue,'data_format',data_format)
+                        end
+                      else
+                        raise(MissingJSONKey,'data_format')
                       end,
 
-        data_version: begin
-                        DATA_VERSIONS.fetch(json['data_version'])
-                      rescue KeyError
-                        raise(InvalidJSON,"unknown \"data_version\": #{json['data_version'].inspect}")
+        data_version: if (data_version = json['data_version'])
+                        begin
+                          DATA_VERSIONS.fetch(data_version)
+                        rescue KeyError
+                          raise(UnknownJSONValue,'data_version',data_version)
+                        end
+                      else
+                        raise(MissingJSONKey,'data_version')
                       end,
 
-        data_meta: begin
-                     DataMeta.from_json(json.fetch('CVE_data_meta'))
-                   rescue KeyError
-                     raise(InvalidJSON,"missing \"CVE_data_meta\" key")
+        data_meta: if (cve_data_meta = json['CVE_data_meta'])
+                     DataMeta.from_json(cve_data_meta)
+                   else
+                     raise(MissingJSONKey,'CVE_data_meta')
                    end,
 
         affects:   json['affects'] && Affects.from_json(json['affects']),
