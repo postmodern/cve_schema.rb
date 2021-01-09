@@ -59,8 +59,14 @@ module CVESchema
       #
       def self.from_json(json)
         new(
-          version_affected: json['version_affected'] &&
-                              VERSION_AFFECTED.fetch(json['version_affected']),
+          version_affected: if json['version_affected']
+                              begin
+                                VERSION_AFFECTED.fetch(json['version_affected'])
+                              rescue KeyError
+                                raise(InvalidJSON,"invalid \"version_affected\": #{json['version_affected'].inspect}")
+                              end
+                            end,
+
           version_name:     json['version_name'],
           version_value:    json['version_value']
         )

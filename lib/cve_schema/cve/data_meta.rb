@@ -1,3 +1,4 @@
+require 'cve_schema/cve/exceptions'
 require 'cve_schema/cve/id'
 require 'cve_schema/cve/timestamp'
 
@@ -133,7 +134,13 @@ module CVESchema
           date_public: json['DATE_PUBLIC'] && Timestamp.parse(json['DATE_PUBLIC']),
           requester: json['REQUESTER'],
           replaced_by: json['REPLACED_BY'] && json['REPLACED_BY'].split(/,\s*/).map { |id| ID.parse(id) },
-          state: json['STATE'] && STATES.fetch(json['STATE']),
+          state: if json['STATE']
+                   begin
+                     STATES.fetch(json['STATE'])
+                   rescue KeyError
+                     raise(InvalidJSON,"unknown \"STATE\": #{json['STATE'].inspect}")
+                   end
+                 end,
           title: json['TITLE']
         )
       end

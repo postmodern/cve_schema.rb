@@ -1,3 +1,4 @@
+require 'cve_schema/cve/exceptions'
 require 'cve_schema/cve/data_meta'
 require 'cve_schema/cve/affects'
 require 'cve_schema/cve/configuration'
@@ -176,9 +177,23 @@ module CVESchema
     #
     def self.from_json(json)
       new(
-        data_type:    DATA_TYPES.fetch(json['data_type']),
-        data_format:  DATA_FORMAT.fetch(json['data_format']),
-        data_version: DATA_VERSIONS.fetch(json['data_version']),
+        data_type:    begin
+                        DATA_TYPES.fetch(json['data_type'])
+                      rescue KeyError
+                        raise(InvalidJSON,"unknown \"data_type\": #{json['data_type'].inspect}")
+                      end,
+
+        data_format:  begin
+                        DATA_FORMAT.fetch(json['data_format'])
+                      rescue KeyError
+                        raise(InvalidJSON,"unknown \"data_format\": #{json['data_format'].inspect}")
+                      end,
+
+        data_version: begin
+                        DATA_VERSIONS.fetch(json['data_version'])
+                      rescue KeyError
+                        raise(InvalidJSON,"unknown \"data_version\": #{json['data_version'].inspect}")
+                      end,
 
         data_meta: DataMeta.from_json(json['CVE_data_meta']),
 
