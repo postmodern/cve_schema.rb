@@ -1,3 +1,4 @@
+require 'cve_schema/cve/exceptions'
 require 'time'
 
 module CVESchema
@@ -16,6 +17,8 @@ module CVESchema
       #
       def self.parse(timestamp)
         DateTime.iso8601(timestamp)
+      rescue Date::Error
+        raise(InvalidJSON,"invalid ISO-8601 timestamp: #{timestamp.inspect}")
       end
     end
   end

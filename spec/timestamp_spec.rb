@@ -17,7 +17,7 @@ describe CVESchema::CVE::Timestamp do
       it do
         expect {
           subject.parse(timestamp)
-        }.to raise_error(Date::Error)
+        }.to raise_error(CVESchema::CVE::InvalidJSON)
       end
     end
   end
