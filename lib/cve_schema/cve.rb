@@ -174,6 +174,10 @@ module CVESchema
     #
     # @return [self]
     #
+    # @raise [MissingJSONKey]
+    #   The `"data_type"`, `"data_format"`, `"data_version"`, or
+    #   `"CVE_data_key"` JSON keys were missing.
+    #
     def self.from_json(json)
       new(
         data_type:    if (data_type = json['data_type'])

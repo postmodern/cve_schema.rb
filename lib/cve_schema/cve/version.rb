@@ -57,6 +57,9 @@ module CVESchema
       #
       # @return [Version]
       #
+      # @raise [UnknownJSONValue]
+      #   The `"version_affected"` JSON value was unknown.
+      #
       def self.from_json(json)
         new(
           version_affected: if (version_affected = json['version_affected'])

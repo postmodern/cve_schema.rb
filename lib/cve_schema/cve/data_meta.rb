@@ -122,6 +122,12 @@ module CVESchema
       #
       # @return [self]
       #
+      # @raise [MissingJSONKey]
+      #   The `"ID"` or `"ASSIGNER"` JSON keys were missing.
+      #
+      # @raise [UnknownJSONValue]
+      #   The `"STATE"` JSON value was unknown.
+      #
       def self.from_json(json)
         new(
           id: if (id = json['ID'])
