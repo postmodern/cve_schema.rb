@@ -140,9 +140,7 @@ module CVESchema
           requester: json['REQUESTER'],
           replaced_by: json['REPLACED_BY'] && json['REPLACED_BY'].split(/,\s*/).map { |id| ID.parse(id) },
           state: if json['STATE']
-                   begin
-                     STATES.fetch(json['STATE'])
-                   rescue KeyError
+                   STATES.fetch(json['STATE']) do
                      raise(UnknownJSONValue,'STATE',json['STATE'])
                    end
                  end,

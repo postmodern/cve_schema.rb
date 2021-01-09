@@ -177,9 +177,7 @@ module CVESchema
     def self.from_json(json)
       new(
         data_type:    if (data_type = json['data_type'])
-                        begin
-                          DATA_TYPES.fetch(data_type)
-                        rescue KeyError
+                        DATA_TYPES.fetch(data_type) do
                           raise(UnknownJSONValue,'data_type',data_type)
                         end
                       else
@@ -187,9 +185,7 @@ module CVESchema
                       end,
 
         data_format:  if (data_format = json['data_format'])
-                        begin
-                          DATA_FORMAT.fetch(data_format)
-                        rescue KeyError
+                        DATA_FORMAT.fetch(data_format) do
                           raise(UnknownJSONValue,'data_format',data_format)
                         end
                       else
@@ -197,9 +193,7 @@ module CVESchema
                       end,
 
         data_version: if (data_version = json['data_version'])
-                        begin
-                          DATA_VERSIONS.fetch(data_version)
-                        rescue KeyError
+                        DATA_VERSIONS.fetch(data_version) do
                           raise(UnknownJSONValue,'data_version',data_version)
                         end
                       else
