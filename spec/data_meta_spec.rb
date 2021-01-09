@@ -50,11 +50,31 @@ describe CVESchema::CVE::DataMeta do
       it 'must parse the "ID": CVE ID and set #id' do
         expect(subject.id).to eq(expected)
       end
+
+      context 'when the "ID" key is missing' do
+        before { json_node.delete('ID') }
+
+        it do
+          expect {
+            described_class.from_json(json_node)
+          }.to raise_error(CVESchema::CVE::InvalidJSON)
+        end
+      end
     end
 
     context '"ASSIGNER":' do
       it "must set #assigner" do
         expect(subject.assigner).to eq(json_node['ASSIGNER'])
+      end
+
+      context 'when the "ASSIGNER" key is missing' do
+        before { json_node.delete('ASSIGNER') }
+
+        it do
+          expect {
+            described_class.from_json(json_node)
+          }.to raise_error(CVESchema::CVE::InvalidJSON)
+        end
       end
     end
 

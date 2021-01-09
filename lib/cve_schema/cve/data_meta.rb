@@ -124,8 +124,17 @@ module CVESchema
       #
       def self.from_json(json)
         new(
-          id:       ID.parse(json['ID']),
-          assigner: json['ASSIGNER'],
+          id:       begin
+                      ID.parse(json.fetch('ID'))
+                    rescue KeyError
+                      raise(InvalidJSON,"missing \"ID\" key")
+                    end,
+
+          assigner: begin
+                      json.fetch('ASSIGNER')
+                    rescue KeyError
+                      raise(InvalidJSON,"missing \"ASSIGNER\" key")
+                    end,
 
           updated: json['UPDATED'] && Timestamp.parse(json['UPDATED']),
           serial:  json['SERIAL'],
