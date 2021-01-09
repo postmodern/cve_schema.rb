@@ -97,6 +97,16 @@ describe CVESchema::CVE do
       it "must convert and set #data_type" do
         expect(subject.data_type).to eq(expected)
       end
+
+      context 'whne "data_type" key is missing' do
+        before { json_node.delete('data_type') }
+
+        it do
+          expect {
+            described_class.from_json(json_node)
+          }.to raise_error(described_class::InvalidJSON)
+        end
+      end
     end
 
     context '"data_format":' do
@@ -105,6 +115,16 @@ describe CVESchema::CVE do
 
       it "must convert and set #data_format" do
         expect(subject.data_format).to eq(expected)
+      end
+
+      context 'whne "data_format" key is missing' do
+        before { json_node.delete('data_format') }
+
+        it do
+          expect {
+            described_class.from_json(json_node)
+          }.to raise_error(described_class::InvalidJSON)
+        end
       end
     end
 
@@ -115,6 +135,16 @@ describe CVESchema::CVE do
       it "must convert and set #data_version" do
         expect(subject.data_version).to eq(expected)
       end
+
+      context 'whne "data_version" key is missing' do
+        before { json_node.delete('data_version') }
+
+        it do
+          expect {
+            described_class.from_json(json_node)
+          }.to raise_error(described_class::InvalidJSON)
+        end
+      end
     end
 
     context '"data_meta":' do
@@ -122,6 +152,16 @@ describe CVESchema::CVE do
 
       it "must convert the JSON Hash into a DataMeta objects and set #data_meta" do
         expect(subject.data_meta).to be_kind_of(described_class::DataMeta)
+      end
+
+      context 'when "CVE_data_meta" key is missing' do
+        before { json_node.delete('CVE_data_meta') }
+
+        it do
+          expect {
+            described_class.from_json(json_node)
+          }.to raise_error(described_class::InvalidJSON)
+        end
       end
     end
 
