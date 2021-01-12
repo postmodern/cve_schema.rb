@@ -169,7 +169,7 @@ module CVESchema
     #
     # Maps the JSON Hash into a Symbols Hash for {#initialize}.
     #
-    # @param [Hash{String => Object}]
+    # @param [Hash{String => Object}] json
     #   The parsed JSON.
     #
     # @return [Hash{Symbol => Object}]
