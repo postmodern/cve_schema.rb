@@ -19,7 +19,7 @@
     include CVESchema
 
     json = JSON.parse(File.read('path/to/CVE-YYYY-XXXX.json'))
-    cve = CVE.from_json(json)
+    cve = CVE.load(json)
 
 ## Requirements
 
