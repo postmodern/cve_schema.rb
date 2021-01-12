@@ -11,3 +11,9 @@ RSpec.shared_examples ".from_json" do
 
   subject { described_class.from_json(json_node) }
 end
+
+RSpec.shared_examples ".load" do
+  include_examples ".from_json"
+
+  subject { described_class.load(json_node) }
+end

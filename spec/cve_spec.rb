@@ -83,8 +83,8 @@ describe CVESchema::CVE do
     end
   end
 
-  describe ".from_json" do
-    include_examples ".from_json"
+  describe ".load" do
+    include_examples ".load"
 
     it "must return a new CVE object" do
       expect(subject).to be_kind_of(described_class)
@@ -103,7 +103,7 @@ describe CVESchema::CVE do
 
         it do
           expect {
-            described_class.from_json(json_node)
+            described_class.load(json_node)
           }.to raise_error(described_class::MissingJSONKey)
         end
       end
@@ -122,7 +122,7 @@ describe CVESchema::CVE do
 
         it do
           expect {
-            described_class.from_json(json_node)
+            described_class.load(json_node)
           }.to raise_error(described_class::MissingJSONKey)
         end
       end
@@ -141,7 +141,7 @@ describe CVESchema::CVE do
 
         it do
           expect {
-            described_class.from_json(json_node)
+            described_class.load(json_node)
           }.to raise_error(described_class::MissingJSONKey)
         end
       end
@@ -159,7 +159,7 @@ describe CVESchema::CVE do
 
         it do
           expect {
-            described_class.from_json(json_node)
+            described_class.load(json_node)
           }.to raise_error(described_class::MissingJSONKey)
         end
       end

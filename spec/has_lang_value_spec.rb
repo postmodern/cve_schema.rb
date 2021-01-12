@@ -29,7 +29,7 @@ describe CVESchema::CVE::HasLangValue do
     end
   end
 
-  describe ".from_json" do
+  describe ".load" do
     subject { klass }
 
     let(:json) do
@@ -39,7 +39,7 @@ describe CVESchema::CVE::HasLangValue do
       }
     end
 
-    subject { klass.from_json(json) }
+    subject { klass.load(json) }
 
     it "must return an instance of the including Class" do
       expect(subject).to be_kind_of(klass)

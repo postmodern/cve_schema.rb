@@ -69,6 +69,9 @@ module CVESchema
           # @return [String]
           attr_reader :score
 
+          #
+          # Initializes the BM object.
+          #
           def initialize(av: nil, ac: nil, pr: nil, ui: nil, s: nil, c: nil,
                          i: nil, a: nil, score: nil)
             @av = av
@@ -84,12 +87,16 @@ module CVESchema
           end
 
           #
-          # @param [Hash{String => Object}] json
+          # Maps the parsed JSON to a Symbol Hash for {#initialize}.
           #
-          # @return [self]
+          # @param [Hash{String => Object}] json
+          #   The parsed JSON.
+          #
+          # @return [Hash{Symbol => Object}]
+          #   The mapped Symbol Hash.
           #
           def self.from_json(json)
-            new(
+            {
               av: AV[json['AV']],
               ac: AC[json['AC']],
               pr: PR[json['PR']],
@@ -100,7 +107,20 @@ module CVESchema
               a:  A[json['A']],
 
               score: json['SCORE']
-            )
+            }
+          end
+
+          #
+          # Loads the BM object from the parsed JSON.
+          #
+          # @param [Hash{String => Object}] json
+          #   The parsed JSON.
+          #
+          # @return [BM]
+          #   The loaded BM object.
+          #
+          def self.load(json)
+            new(**from_json(json))
           end
 
         end
@@ -131,6 +151,9 @@ module CVESchema
           # @return [:X, :C, :R, :U]
           attr_reader :rc
 
+          #
+          # Initializes the TM object.
+          #
           def initialize(e: nil, rl: nil, rc: nil)
             @e  = e
             @rl = rl
@@ -138,16 +161,33 @@ module CVESchema
           end
 
           #
-          # @param [Hash{String => Object}] json
+          # Maps the parsed JSON to the Symbol Hash for {#initialize}.
           #
-          # @return [self]
+          # @param [Hash{String => Object}] json
+          #   The parsed JSON.
+          #
+          # @return [Hash{Symbol => Object}]
+          #   The mapped Symbol Hash.
           #
           def self.from_json(json)
-            new(
+            {
               e:  E[json['E']],
               rl: RL[json['RL']],
               rc: RC[json['RC']]
-            )
+            }
+          end
+
+          #
+          # Loads the TM object from the parsed JSON.
+          #
+          # @param [Hash{String => Object}] json
+          #   The parsed JSON.
+          #
+          # @return [TM]
+          #   The loaded TM object.
+          #
+          def self.load(json)
+            new(**from_json(json))
           end
 
         end
@@ -234,6 +274,9 @@ module CVESchema
           # @return [:H, :L, :N]
           attr_reader :ma
 
+          #
+          # Initializes the EM object.
+          #
           def initialize(cr: nil, ir: nil, ar: nil, mav: nil, mac: nil,
                          mpr: nil, mui: nil, ms: nil, mc: nil, mi: nil, ma: nil)
             @cr  = cr
@@ -250,12 +293,16 @@ module CVESchema
           end
 
           #
-          # @param [Hash{String => Object}] json
+          # Maps the parsed JSON to a Symbol Hash for {#initialize}.
           #
-          # @return [self]
+          # @param [Hash{String => Object}] json
+          #   The parsed JSON.
+          #
+          # @return [Hash{Symbol => Object}]
+          #   The mapped Symbol Hash.
           #
           def self.from_json(json)
-            new(
+            {
               cr:  CR[json['CR']],
               ir:  IR[json['IR']],
               ar:  AR[json['AR']],
@@ -267,7 +314,20 @@ module CVESchema
               mc:  MC[json['MC']],
               mi:  MI[json['MI']],
               ma:  MA[json['MA']]
-            )
+            }
+          end
+
+          #
+          # Loads the EM object from the parsed JSON.
+          #
+          # @param [Hash{String => Object}] json
+          #   The parsed JSON.
+          #
+          # @return [EM]
+          #   The loaded EM object.
+          #
+          def self.load(json)
+            new(**from_json(json))
           end
 
         end
@@ -291,16 +351,33 @@ module CVESchema
         end
 
         #
-        # @param [Hash{String => Object}] json
+        # Maps the parsed JSON to a Symbol Hash for {#initialize}.
         #
-        # @return [CVSSv2]
+        # @param [Hash{String => Object}] json
+        #   The parsed JSON.
+        #
+        # @return [Hash{Symbol => Object}]
+        #   The mapped Symbol Hash.
         #
         def self.from_json(json)
-          new(
-            bm: json['BM'] && BM.from_json(json['BM']),
-            tm: json['TM'] && TM.from_json(json['TM']),
-            em: json['EM'] && EM.from_json(json['EM'])
-          )
+          {
+            bm: json['BM'] && BM.load(json['BM']),
+            tm: json['TM'] && TM.load(json['TM']),
+            em: json['EM'] && EM.load(json['EM'])
+          }
+        end
+
+        #
+        # Loads the CVSSv3 object from the parsed JSON.
+        #
+        # @param [Hash{String => Object}] json
+        #   The parsed JSON.
+        #
+        # @return [CVSSv3]
+        #   the loaded CVSSv3 object.
+        #
+        def self.load(json)
+          new(**from_json(json))
         end
 
       end

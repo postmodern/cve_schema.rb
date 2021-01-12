@@ -22,17 +22,29 @@ module CVESchema
       end
 
       #
+      # Maps the parsed JSON to an Array of {Description} objects for
+      # {#initialize}.
+      #
+      # @param [Hash{String => Object}] json
+      #   The parsed JSON.
+      #
+      # @return [Array<Description>]
+      #
+      def self.from_json(json)
+        json['description'].map(&Description.method(:load))
+       end
+
+      #
       # Loads the problem-type object from parsed JSON.
       #
       # @param [Hash{String => Object}] json
       #   The parsed JSON.
       #
-      # @return [self]
+      # @return [ProblemType]
+      #   The loaded problem-type object.
       #
-      def self.from_json(json)
-        new(
-          json['description'].map(&Description.method(:from_json))
-        )
+      def self.load(json)
+        new(from_json(json))
       end
 
     end

@@ -37,18 +37,33 @@ module CVESchema
       end
 
       #
-      # Loads the source from the parsed JSON.
+      # Maps the parsed JSON to a Symbol Hash for {#initialize}.
       #
       # @param [Hash{String => Object}] json
+      #   The parsed JSON.
       #
-      # @return [self]
+      # @return [Hash{Symbol => Object}]
+      #   The mapped Symbol Hash.
       #
       def self.from_json(json)
-        new(
+        {
           defect:    json['defect'],
           discovery: DISCOVERY[json['discovery']],
           advisory:  json['advisory']
-        )
+        }
+      end
+
+      #
+      # Loads the source from the parsed JSON.
+      #
+      # @param [Hash{String => Object}] json
+      #   The parsed JSON.
+      #
+      # @return [Source]
+      #   The loaded source object.
+      #
+      def self.load(json)
+        new(**from_json(json))
       end
 
     end

@@ -51,17 +51,19 @@ module CVESchema
       end
 
       #
-      # Loads the version object from parsed JSON.
+      # Maps the parsed JSON to a Symbol Hash for {#initialize}.
       #
       # @param [Hash{String => String}] json
+      #   The parsed JSON.
       #
-      # @return [Version]
+      # @return [Hash{Symbol => Object}]
+      #   The mapped Symbol Hash.
       #
       # @raise [UnknownJSONValue]
       #   The `"version_affected"` JSON value was unknown.
       #
       def self.from_json(json)
-        new(
+        {
           version_affected: if (version_affected = json['version_affected'])
                               VERSION_AFFECTED.fetch(version_affected) do
                                 raise(UnknownJSONValue,'version_affected',version_affected)
@@ -70,7 +72,23 @@ module CVESchema
 
           version_name:     json['version_name'],
           version_value:    json['version_value']
-        )
+        }
+      end
+
+      #
+      # Loads the version object from parsed JSON.
+      #
+      # @param [Hash{String => String}] json
+      #   The parsed JSON.
+      #
+      # @return [Version]
+      #   The loaded version object.
+      #
+      # @raise [UnknownJSONValue]
+      #   The `"version_affected"` JSON value was unknown.
+      #
+      def self.load(json)
+        new(**from_json(json))
       end
 
       def na?

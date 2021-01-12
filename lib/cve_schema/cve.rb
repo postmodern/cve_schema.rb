@@ -167,19 +167,20 @@ module CVESchema
     end
 
     #
-    # Loads the CVE data from parsed JSON.
+    # Maps the JSON Hash into a Symbols Hash for {#initialize}.
     #
-    # @param [Hash{String => Object}] json
+    # @param [Hash{String => Object}]
     #   The parsed JSON.
     #
-    # @return [self]
-    #
+    # @return [Hash{Symbol => Object}]
+    #   The maped Symbol Hash.
+    #   
     # @raise [MissingJSONKey]
     #   The `"data_type"`, `"data_format"`, `"data_version"`, or
     #   `"CVE_data_key"` JSON keys were missing.
     #
     def self.from_json(json)
-      new(
+      {
         data_type:    if (data_type = json['data_type'])
                         DATA_TYPES.fetch(data_type) do
                           raise(UnknownJSONValue,'data_type',data_type)
@@ -205,27 +206,43 @@ module CVESchema
                       end,
 
         data_meta: if (cve_data_meta = json['CVE_data_meta'])
-                     DataMeta.from_json(cve_data_meta)
+                     DataMeta.load(cve_data_meta)
                    else
                      raise(MissingJSONKey,'CVE_data_meta')
                    end,
 
-        affects:   json['affects'] && Affects.from_json(json['affects']),
-        configuration: Array(json['configuration']).map(&Configuration.method(:from_json)),
-        problemtype: Array(json['problemtype'] && json['problemtype']['problemtype_data']).map(&ProblemType.method(:from_json)),
+        affects:   json['affects'] && Affects.load(json['affects']),
+        configuration: Array(json['configuration']).map(&Configuration.method(:load)),
+        problemtype: Array(json['problemtype'] && json['problemtype']['problemtype_data']).map(&ProblemType.method(:load)),
 
-        references: Array(json['references'] && json['references']['reference_data']).map(&Reference.method(:from_json)),
+        references: Array(json['references'] && json['references']['reference_data']).map(&Reference.method(:load)),
 
-        description: Array(json['description'] && json['description']['description_data']).map(&Description.method(:from_json)),
+        description: Array(json['description'] && json['description']['description_data']).map(&Description.method(:load)),
 
-        exploit: Array(json['exploit']).map(&Exploit.method(:from_json)),
-        credit: Array(json['credit']).map(&Credit.method(:from_json)),
-        impact: json['impact'] && Impact.from_json(json['impact']),
-        solution: Array(json['solution']).map(&Solution.method(:from_json)),
-        source: json['source'] && Source.from_json(json['source']),
-        work_around: Array(json['work_around']).map(&WorkAround.method(:from_json)),
-        timeline: Array(json['timeline']).map(&Timeline.method(:from_json))
-      )
+        exploit: Array(json['exploit']).map(&Exploit.method(:load)),
+        credit: Array(json['credit']).map(&Credit.method(:load)),
+        impact: json['impact'] && Impact.load(json['impact']),
+        solution: Array(json['solution']).map(&Solution.method(:load)),
+        source: json['source'] && Source.load(json['source']),
+        work_around: Array(json['work_around']).map(&WorkAround.method(:load)),
+        timeline: Array(json['timeline']).map(&Timeline.method(:load))
+      }
+    end
+
+    #
+    # Loads the CVE data from parsed JSON.
+    #
+    # @param [Hash{String => Object}] json
+    #   The parsed JSON.
+    #
+    # @return [self]
+    #
+    # @raise [MissingJSONKey]
+    #   The `"data_type"`, `"data_format"`, `"data_version"`, or
+    #   `"CVE_data_key"` JSON keys were missing.
+    #
+    def self.load(json)
+      new(**from_json(json))
     end
 
   end

@@ -115,12 +115,13 @@ module CVESchema
       end
 
       #
-      # Loads the data-meta object from parsed JSON.
+      # Maps the parsed JSON to a Symbol Hash for {#initialize}.
       #
       # @param [Hash{String => Object}] json
       #   The parsed JSON.
       #
-      # @return [self]
+      # @return [Hash{Symbol => Object}]
+      #   The Symbol Hash.
       #
       # @raise [MissingJSONKey]
       #   The `"ID"` or `"ASSIGNER"` JSON keys were missing.
@@ -129,7 +130,7 @@ module CVESchema
       #   The `"STATE"` JSON value was unknown.
       #
       def self.from_json(json)
-        new(
+        {
           id: if (id = json['ID'])
                 ID.parse(id)
               else
@@ -151,7 +152,26 @@ module CVESchema
                    end
                  end,
           title: json['TITLE']
-        )
+        }
+      end
+
+      #
+      # Loads the data-meta object from the parsed JSON.
+      #
+      # @param [Hash{String => Object}] json
+      #   The parsed JSON.
+      #
+      # @return [self]
+      #   The loaded data-meta object.
+      #
+      # @raise [MissingJSONKey]
+      #   The `"ID"` or `"ASSIGNER"` JSON keys were missing.
+      #
+      # @raise [UnknownJSONValue]
+      #   The `"STATE"` JSON value was unknown.
+      #
+      def self.load(json)
+        new(**from_json(json))
       end
 
     end

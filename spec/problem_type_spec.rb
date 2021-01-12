@@ -13,8 +13,8 @@ describe CVESchema::CVE::ProblemType do
     end
   end
 
-  describe ".from_json" do
-    include_examples ".from_json"
+  describe ".load" do
+    include_examples ".load"
 
     let(:json_node) { json_tree['problemtype']['problemtype_data'][0] }
 

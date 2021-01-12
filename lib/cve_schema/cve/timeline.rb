@@ -27,19 +27,33 @@ module CVESchema
       end
 
       #
+      # Maps the parsed JSON to a Symbol Hash for {#initialize}.
+      #
+      # @param [Hash{String => Object}] json
+      #   The parsed JSON.
+      #
+      # @return [Hash{Symbol => Object}]
+      #   The mapped Symbol Hash.
+      #
+      def self.from_json(json)
+        {
+          lang: json['lang'],
+          time: Timestamp.parse(json['time']),
+          value: json['value']
+        }
+      end
+
+      #
       # Loads the timeline object from the parsed JSON.
       #
       # @param [Hash{String => Object}] json
       #   The parsed JSON.
       #
-      # @return [self]
+      # @return [Timeline]
+      #   The loaded timeline object.
       #
-      def self.from_json(json)
-        new(
-          lang: json['lang'],
-          time: Timestamp.parse(json['time']),
-          value: json['value']
-        )
+      def self.load(json)
+        new(**from_json(json))
       end
 
     end

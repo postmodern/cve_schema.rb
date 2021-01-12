@@ -38,8 +38,8 @@ describe CVESchema::CVE::DataMeta do
     end
   end
 
-  describe ".from_json" do
-    include_examples ".from_json"
+  describe ".load" do
+    include_examples ".load"
 
     let(:json_node) { json_tree['CVE_data_meta'] }
 
@@ -56,7 +56,7 @@ describe CVESchema::CVE::DataMeta do
 
         it do
           expect {
-            described_class.from_json(json_node)
+            described_class.load(json_node)
           }.to raise_error(CVESchema::CVE::MissingJSONKey)
         end
       end
@@ -72,7 +72,7 @@ describe CVESchema::CVE::DataMeta do
 
         it do
           expect {
-            described_class.from_json(json_node)
+            described_class.load(json_node)
           }.to raise_error(CVESchema::CVE::MissingJSONKey)
         end
       end

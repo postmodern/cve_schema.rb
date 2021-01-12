@@ -25,18 +25,32 @@ module CVESchema
         }
 
         #
+        # Maps the parsed JSON to a Symbol Hash for {#initialize}.
+        #
+        # @param [Hash{String => Object}] json
+        #   The parsed JSON.
+        #
+        # @return [Hash{Symbol => Object}]
+        #   The mapped Symbol Hash.
+        #
+        def from_json(json)
+          {
+            lang:  LANG.fetch(json['lang'],json['lang']),
+            value: json['value']
+          }
+        end
+
+        #
         # Loads the objects from the parsed JSON.
         #
         # @param [Hash{String => Object}] json
         #   The parsed JSON.
         #
         # @return [HasLangValue]
+        #   The loaded object.
         #
-        def from_json(json)
-          new(
-            lang:  LANG.fetch(json['lang'],json['lang']),
-            value: json['value']
-          )
+        def load(json)
+          new(**from_json(json))
         end
       end
 

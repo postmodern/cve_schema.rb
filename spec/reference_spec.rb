@@ -41,8 +41,8 @@ describe CVESchema::CVE::Reference do
     end
   end
 
-  describe ".from_json" do
-    include_examples ".from_json"
+  describe ".load" do
+    include_examples ".load"
 
     let(:json_node) { json_tree['references']['reference_data'][0] }
 

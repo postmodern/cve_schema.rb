@@ -41,18 +41,32 @@ module CVESchema
       end
 
       #
+      # Maps the parsed JSON to a Symbol Hash for {#initialize}.
+      #
+      # @param [Hash{String => Object}] json
+      #   The parsed JSON.
+      #
+      # @return [Hash{Symbol => Object}]
+      #   The mapped Symbol Hash.
+      #
+      def self.from_json(json)
+        {
+          vendor_name: json['vendor_name'],
+          product:     json['product']['product_data'].map(&Product.method(:load))
+        }
+      end
+
+      #
       # Loads the vendor object from the parsed JSON.
       #
       # @param [Hash{String => Object}] json
       #   The parsed JSON.
       #
-      # @return [self]
+      # @return [Vendor]
+      #   The loaded vendor object.
       #
-      def self.from_json(json)
-        new(
-          vendor_name: json['vendor_name'],
-          product:     json['product']['product_data'].map(&Product.method(:from_json))
-        )
+      def self.load(json)
+        new(**from_json(json))
       end
 
     end

@@ -27,12 +27,16 @@ module CVESchema
       # @param [Hash{String => Object}] json
       #   The parsed JSON.
       #
-      # @return [self]
+      # @return [Array<Vendor>]
       #
       def self.from_json(json)
-        new(
-          json['vendor']['vendor_data'].map(&Vendor.method(:from_json))
-        )
+        json['vendor']['vendor_data'].map(&Vendor.method(:load))
+      end
+
+      # @return [self]
+      #
+      def self.load(json)
+        new(from_json(json))
       end
 
     end

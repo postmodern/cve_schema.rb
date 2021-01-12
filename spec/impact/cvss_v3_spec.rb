@@ -35,8 +35,8 @@ describe CVESchema::CVE::Impact::CVSSv3 do
     end
   end
 
-  describe ".from_json" do
-    include_examples ".from_json"
+  describe ".load" do
+    include_examples ".load"
 
     let(:cve_id) { 'CVE-2020-4700' }
     let(:json_node) { json_tree['impact']['cvssv3'] }
@@ -60,8 +60,8 @@ describe CVESchema::CVE::Impact::CVSSv3 do
     describe "#initialize" do
     end
 
-    describe ".from_json" do
-      include_examples ".from_json"
+    describe ".load" do
+      include_examples ".load"
 
       let(:cve_id) { 'CVE-2020-4700' }
       let(:json_node) { json_tree['impact']['cvssv3']['BM'] }
@@ -86,8 +86,8 @@ describe CVESchema::CVE::Impact::CVSSv3 do
     describe "#initialize" do
     end
 
-    describe ".from_json" do
-      include_examples ".from_json"
+    describe ".load" do
+      include_examples ".load"
 
       let(:cve_id) { 'CVE-2020-4700' }
       let(:json_node) { json_tree['impact']['cvssv3']['TM'] }
@@ -106,8 +106,8 @@ describe CVESchema::CVE::Impact::CVSSv3 do
     describe "#initialize" do
     end
 
-    describe ".from_json" do
-      include_examples ".from_json"
+    describe ".load" do
+      include_examples ".load"
 
       let(:cve_id) { 'CVE-2020-4700' }
       let(:json_node) { json_tree['impact']['cvssv3']['EM'] }
