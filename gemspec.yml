@@ -5,7 +5,13 @@ description: |
 license: MIT
 authors: Postmodern
 email: postmodern.mod3@gmail.com
-homepage: https://github.com/postmodern/cve_schema#readme
+homepage: https://github.com/postmodern/cve_schema.rb#readme
+
+metadata:
+  documentation_uri: https://rubydoc.info/gems/cve_schema
+  source_code_uri:   https://github.com/postmodern/cve_schema.rb
+  bug_tracker_uri:   https://github.com/postmodern/cve_schema.rb/issues
+  changelog_uri:     https://github.com/postmodern/cve_schema.rb/blob/main/ChangeLog.md
 
 required_ruby_version: ">= 2.7.0"
 
