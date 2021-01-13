@@ -133,6 +133,8 @@ module CVESchema
     #
     # @param [Array<Timeline>] timeline
     #
+    # @api semipublic
+    #
     def initialize(data_type: , data_format: , data_version: , data_meta: ,
                    affects: nil,
                    configuration: [],
@@ -178,6 +180,8 @@ module CVESchema
     # @raise [MissingJSONKey]
     #   The `"data_type"`, `"data_format"`, `"data_version"`, or
     #   `"CVE_data_key"` JSON keys were missing.
+    #
+    # @api semipublic
     #
     def self.from_json(json)
       {
@@ -240,6 +244,8 @@ module CVESchema
     # @raise [MissingJSONKey]
     #   The `"data_type"`, `"data_format"`, `"data_version"`, or
     #   `"CVE_data_key"` JSON keys were missing.
+    #
+    # @api public
     #
     def self.load(json)
       new(**from_json(json))

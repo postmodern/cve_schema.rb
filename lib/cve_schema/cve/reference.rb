@@ -51,6 +51,8 @@ module CVESchema
       # @return [Hash{Symbol => Object}]
       #   The mapped Symbol Hash.
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         {
           url:  json['url'],
@@ -66,6 +68,8 @@ module CVESchema
       #   The parsed JSON.
       #
       # @return [Reference]
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(**from_json(json))

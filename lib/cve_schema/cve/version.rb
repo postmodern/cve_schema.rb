@@ -62,6 +62,8 @@ module CVESchema
       # @raise [UnknownJSONValue]
       #   The `"version_affected"` JSON value was unknown.
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         {
           version_affected: if (version_affected = json['version_affected'])
@@ -86,6 +88,8 @@ module CVESchema
       #
       # @raise [UnknownJSONValue]
       #   The `"version_affected"` JSON value was unknown.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(**from_json(json))

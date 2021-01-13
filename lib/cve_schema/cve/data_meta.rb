@@ -129,6 +129,8 @@ module CVESchema
       # @raise [UnknownJSONValue]
       #   The `"STATE"` JSON value was unknown.
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         {
           id: if (id = json['ID'])
@@ -169,6 +171,8 @@ module CVESchema
       #
       # @raise [UnknownJSONValue]
       #   The `"STATE"` JSON value was unknown.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(**from_json(json))

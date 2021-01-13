@@ -45,6 +45,8 @@ module CVESchema
       # @return [Hash{Symbol => Object}]
       #   The mapped Symbol Hash.
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         {
           product_name: json['product_name'],
@@ -60,6 +62,8 @@ module CVESchema
       #
       # @return [Product]
       #   The loaded product.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(**from_json(json))

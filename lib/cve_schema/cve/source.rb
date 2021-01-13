@@ -62,6 +62,8 @@ module CVESchema
       # @return [Source]
       #   The loaded source object.
       #
+      # @api semipublic
+      #
       def self.load(json)
         new(**from_json(json))
       end

@@ -35,6 +35,8 @@ module CVESchema
       # @return [Hash{Symbol => Object}]
       #   The mapped Symbol Hash.
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         {
           lang: json['lang'],
@@ -51,6 +53,8 @@ module CVESchema
       #
       # @return [Timeline]
       #   The loaded timeline object.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(**from_json(json))

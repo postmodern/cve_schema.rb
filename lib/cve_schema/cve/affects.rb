@@ -29,6 +29,8 @@ module CVESchema
       #
       # @return [Array<Vendor>]
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         json['vendor']['vendor_data'].map(&Vendor.method(:load))
       end
@@ -41,6 +43,8 @@ module CVESchema
       #
       # @return [Affects]
       #   The loaded affects object.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(from_json(json))

@@ -30,6 +30,8 @@ module CVESchema
       #
       # @return [Array<Description>]
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         json['description'].map(&Description.method(:load))
        end
@@ -42,6 +44,8 @@ module CVESchema
       #
       # @return [ProblemType]
       #   The loaded problem-type object.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(from_json(json))

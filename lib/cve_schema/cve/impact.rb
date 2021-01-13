@@ -38,6 +38,8 @@ module CVESchema
       # @return [Hash{Symbol => Object}]
       #   The mapped Symbol Hash.
       #
+      # @api semipublic
+      #
       def self.from_json(json)
         {
           cvssv2: json['cvssv2'] && CVSSv2.load(json['cvssv2']),
@@ -53,6 +55,8 @@ module CVESchema
       #
       # @return [Impact]
       #   The loaded impact object.
+      #
+      # @api semipublic
       #
       def self.load(json)
         new(**from_json(json))
