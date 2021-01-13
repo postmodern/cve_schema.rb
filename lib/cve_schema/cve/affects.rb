@@ -22,7 +22,7 @@ module CVESchema
       end
 
       #
-      # Loads the affects object from parsed JSON.
+      # Maps the parsed JSON to an Array of {Vendor} objects for {#initialize}.
       #
       # @param [Hash{String => Object}] json
       #   The parsed JSON.
@@ -33,7 +33,14 @@ module CVESchema
         json['vendor']['vendor_data'].map(&Vendor.method(:load))
       end
 
-      # @return [self]
+      #
+      # Loads the affects object from parsed JSON.
+      #
+      # @param [Hash{String => Object}] json
+      #   The parsed JSON.
+      #
+      # @return [Affects]
+      #   The loaded affects object.
       #
       def self.load(json)
         new(from_json(json))

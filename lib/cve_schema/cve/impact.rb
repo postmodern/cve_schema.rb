@@ -15,6 +15,15 @@ module CVESchema
 
       alias cvss_v3 cvssv3
 
+      #
+      # Initializes the impact object.
+      #
+      # @param [CVSSv2, nil] cvssv2
+      #   The CVSSv2 object.
+      #
+      # @param [CVSSv3, nil] cvssv3
+      #   The CVSSv3 object.
+      #
       def initialize(cvssv2: nil, cvssv3: nil)
         @cvssv2 = cvssv2
         @cvssv3 = cvssv3
