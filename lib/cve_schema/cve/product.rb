@@ -32,6 +32,11 @@ module CVESchema
         @version      = version
       end
 
+      #
+      # Determines if the {#product_name} is `n/a`.
+      #
+      # @return [Boolean]
+      #
       def na?
         @product_name == NA
       end

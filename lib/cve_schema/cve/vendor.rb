@@ -26,6 +26,11 @@ module CVESchema
         @product     = product
       end
 
+      #
+      # Determines if the {#vendor_name} is `n/a`.
+      #
+      # @return [Boolean]
+      #
       def na?
         @vendor_name == NA
       end

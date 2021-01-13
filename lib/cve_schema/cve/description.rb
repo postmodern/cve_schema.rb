@@ -10,6 +10,11 @@ module CVESchema
 
       include HasLangValue
 
+      #
+      # Determines if the {#value} is `n/a`.
+      #
+      # @return [Boolean]
+      #
       def na?
         @value == NA
       end

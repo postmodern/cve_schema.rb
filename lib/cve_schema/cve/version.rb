@@ -95,6 +95,11 @@ module CVESchema
         new(**from_json(json))
       end
 
+      #
+      # Determines if the {#version_value} is `n/a`.
+      #
+      # @return [Boolean]
+      #
       def na?
         @version_value == NA
       end
