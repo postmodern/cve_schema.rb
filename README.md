@@ -11,7 +11,7 @@
 
 ## Features
 
-* Supports [CVE JSON Schema v4.0]
+* Supports [CVE JSON Schema v4.0].
 * Uses Plain-Old-Ruby-Objects (PORO) for speed!
 * No runtime dependencies.
 
