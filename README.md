@@ -31,6 +31,14 @@
 
     $ gem install cve_schema
 
+## Benchmark
+
+    Loading all 192879 JSON files into memory. This may take a while ...
+    Mapping all 192879 to CVESchema::CVE objects ...
+    
+    Total:	 12.310090   0.275629  12.585719 ( 12.664896)
+    Avg:	  0.000064   0.000001   0.000065 (  0.000066)
+
 ## Copyright
 
 Copyright (c) 2020-2021 Hal Brodigan
