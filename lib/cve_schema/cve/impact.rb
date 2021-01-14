@@ -41,9 +41,17 @@ module CVESchema
       # @api semipublic
       #
       def self.from_json(json)
+        # HACK: the "impact" value is often an Array containing a single Hash
+        hash = case json
+               when Hash  then json
+               when Array then json[0]
+               else
+                 raise(InvalidJSON,'"impact" is neither a Hash or Array')
+               end
+
         {
-          cvssv2: json['cvssv2'] && CVSSv2.load(json['cvssv2']),
-          cvssv3: json['cvssv3'] && CVSSv3.load(json['cvssv3'])
+          cvssv2: hash['cvssv2'] && CVSSv2.load(hash['cvssv2']),
+          cvssv3: hash['cvssv3'] && CVSSv3.load(hash['cvssv3'])
         }
       end
 
