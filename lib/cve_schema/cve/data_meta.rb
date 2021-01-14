@@ -138,10 +138,10 @@ module CVESchema
           id: if (id = json['ID'])
                 ID.parse(id)
               else
-                raise(MissingJSONKey,'ID')
+                raise MissingJSONKey.new('ID')
               end,
 
-          assigner: json['ASSIGNER'] || raise(MissingJSONKey,'ASSIGNER'),
+          assigner: json['ASSIGNER'] || raise(MissingJSONKey.new('ASSIGNER')),
 
           updated: json['UPDATED'] && Timestamp.parse(json['UPDATED']),
           serial:  json['SERIAL'],
@@ -152,7 +152,7 @@ module CVESchema
           replaced_by: json['REPLACED_BY'] && json['REPLACED_BY'].split(/,\s*/).map { |id| ID.parse(id) },
           state: if json['STATE']
                    STATES.fetch(json['STATE']) do
-                     raise(UnknownJSONValue,'STATE',json['STATE'])
+                     raise UnknownJSONValue.new('STATE',json['STATE'])
                    end
                  end,
           title: json['TITLE']

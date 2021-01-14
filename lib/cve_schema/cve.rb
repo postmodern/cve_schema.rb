@@ -189,32 +189,32 @@ module CVESchema
       {
         data_type:    if (data_type = json['data_type'])
                         DATA_TYPES.fetch(data_type) do
-                          raise(UnknownJSONValue,'data_type',data_type)
+                          raise UnknownJSONValue.new('data_type',data_type)
                         end
                       else
-                        raise(MissingJSONKey,'data_type')
+                        raise MissingJSONKey.new('data_type')
                       end,
 
         data_format:  if (data_format = json['data_format'])
                         DATA_FORMAT.fetch(data_format) do
-                          raise(UnknownJSONValue,'data_format',data_format)
+                          raise UnknownJSONValue.new('data_format',data_format)
                         end
                       else
-                        raise(MissingJSONKey,'data_format')
+                        raise MissingJSONKey.new('data_format')
                       end,
 
         data_version: if (data_version = json['data_version'])
                         DATA_VERSIONS.fetch(data_version) do
-                          raise(UnknownJSONValue,'data_version',data_version)
+                          raise UnknownJSONValue.new('data_version',data_version)
                         end
                       else
-                        raise(MissingJSONKey,'data_version')
+                        raise MissingJSONKey.new('data_version')
                       end,
 
         data_meta: if (cve_data_meta = json['CVE_data_meta'])
                      DataMeta.load(cve_data_meta)
                    else
-                     raise(MissingJSONKey,'CVE_data_meta')
+                     raise MissingJSONKey.new('CVE_data_meta')
                    end,
 
         affects:   json['affects'] && Affects.load(json['affects']),

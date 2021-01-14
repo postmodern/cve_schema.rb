@@ -71,7 +71,7 @@ module CVESchema
         {
           version_affected: if (version_affected = json['version_affected'])
                               VERSION_AFFECTED.fetch(version_affected) do
-                                raise(UnknownJSONValue,'version_affected',version_affected)
+                                raise UnknownJSONValue.new('version_affected',version_affected)
                               end
                             end,
 
