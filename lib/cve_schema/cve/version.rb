@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'cve_schema/exceptions'
 require 'cve_schema/cve/na'
 
 module CVESchema

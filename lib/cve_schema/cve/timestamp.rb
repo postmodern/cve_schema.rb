@@ -1,4 +1,4 @@
-require 'cve_schema/cve/exceptions'
+require 'cve_schema/exceptions'
 require 'time'
 
 module CVESchema

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'cve_schema/cve/exceptions'
+require 'cve_schema/exceptions'
 require 'cve_schema/cve/data_meta'
 require 'cve_schema/cve/affects'
 require 'cve_schema/cve/configuration'

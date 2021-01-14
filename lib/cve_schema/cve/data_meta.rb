@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'cve_schema/cve/exceptions'
+require 'cve_schema/exceptions'
 require 'cve_schema/cve/id'
 require 'cve_schema/cve/timestamp'
 
