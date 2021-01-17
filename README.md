@@ -31,6 +31,10 @@
 
     $ gem install cve_schema
 
+### Gemfile
+
+    gem 'cve_schema', '~> 0.1'
+
 ## Benchmark
 
     Loading all 192879 JSON files into memory. This may take a while ...
