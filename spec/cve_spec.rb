@@ -69,16 +69,16 @@ describe CVESchema::CVE do
         )
       end
 
-      it { expect(subject.affects).to eq(nil)       }
+      it { expect(subject.affects).to be(nil)       }
       it { expect(subject.configurations).to eq([]) }
       it { expect(subject.problemtype).to eq([])    }
       it { expect(subject.references).to eq([])     }
       it { expect(subject.description).to eq([])    }
       it { expect(subject.exploit).to eq([])        }
       it { expect(subject.credit).to eq([])         }
-      it { expect(subject.impact).to eq(nil)        }
+      it { expect(subject.impact).to be(nil)        }
       it { expect(subject.solution).to eq([])       }
-      it { expect(subject.source).to eq(nil)        }
+      it { expect(subject.source).to be(nil)        }
       it { expect(subject.work_around).to eq([])    }
     end
   end
