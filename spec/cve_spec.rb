@@ -98,7 +98,7 @@ describe CVESchema::CVE do
         expect(subject.data_type).to eq(expected)
       end
 
-      context 'whne "data_type" key is missing' do
+      context 'when "data_type" key is missing' do
         before { json_node.delete('data_type') }
 
         it do
@@ -117,7 +117,7 @@ describe CVESchema::CVE do
         expect(subject.data_format).to eq(expected)
       end
 
-      context 'whne "data_format" key is missing' do
+      context 'when "data_format" key is missing' do
         before { json_node.delete('data_format') }
 
         it do
@@ -136,7 +136,7 @@ describe CVESchema::CVE do
         expect(subject.data_version).to eq(expected)
       end
 
-      context 'whne "data_version" key is missing' do
+      context 'when "data_version" key is missing' do
         before { json_node.delete('data_version') }
 
         it do
