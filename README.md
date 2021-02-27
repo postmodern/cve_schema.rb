@@ -1,5 +1,7 @@
 # cve_schema
 
+[![CI](https://github.com/postmodern/cve_schema.rb/actions/workflows/ruby.yml/badge.svg)](https://github.com/postmodern/cve_schema.rb/actions/workflows/ruby.yml)
+
 * [Homepage](https://github.com/postmodern/cve_schema#readme)
 * [Issues](https://github.com/postmodern/cve_schema/issues)
 * [Documentation](http://rubydoc.info/gems/cve_schema/frames)
