@@ -1,6 +1,7 @@
 # cve_schema
 
 [![CI](https://github.com/postmodern/cve_schema.rb/actions/workflows/ruby.yml/badge.svg)](https://github.com/postmodern/cve_schema.rb/actions/workflows/ruby.yml)
+[![Code Climate](https://codeclimate.com/github/postmodern/cve_schema.rb.svg)](https://codeclimate.com/github/postmodern/cve_schema.rb)
 
 * [Homepage](https://github.com/postmodern/cve_schema#readme)
 * [Issues](https://github.com/postmodern/cve_schema/issues)
