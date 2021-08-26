@@ -177,7 +177,7 @@ module CVESchema
     #   The parsed JSON.
     #
     # @return [Hash{Symbol => Object}]
-    #   The maped Symbol Hash.
+    #   The mapped Symbol Hash.
     #   
     # @raise [MissingJSONKey]
     #   The `"data_type"`, `"data_format"`, `"data_version"`, or

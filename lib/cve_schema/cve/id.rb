@@ -55,7 +55,7 @@ module CVESchema
       #   The other ID.
       #
       # @return [Boolean]
-      #   Identicates whether the IDs match.
+      #   Indicates whether the IDs match.
       #
       def ==(other)
         self.class == other.class && (
