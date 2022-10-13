@@ -20,11 +20,13 @@
 
 ## Examples
 
-    require 'cve_schema'
-    include CVESchema
+```ruby
+require 'cve_schema'
+include CVESchema
 
-    json = JSON.parse(File.read('path/to/CVE-YYYY-XXXX.json'))
-    cve = CVE.load(json)
+json = JSON.parse(File.read('path/to/CVE-YYYY-XXXX.json'))
+cve = CVE.load(json)
+```
 
 ## Requirements
 
@@ -32,11 +34,15 @@
 
 ## Install
 
-    $ gem install cve_schema
+```shell
+$ gem install cve_schema
+```
 
 ### Gemfile
 
-    gem 'cve_schema', '~> 0.1'
+```ruby
+gem 'cve_schema', '~> 0.1'
+```
 
 ## Benchmark
 
