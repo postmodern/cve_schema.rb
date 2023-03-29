@@ -6,7 +6,6 @@
 * [Homepage](https://github.com/postmodern/cve_schema.rb#readme)
 * [Issues](https://github.com/postmodern/cve_schema.rb/issues)
 * [Documentation](http://rubydoc.info/gems/cve_schema/frames)
-* [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
 
