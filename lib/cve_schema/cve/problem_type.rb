@@ -34,7 +34,7 @@ module CVESchema
       #
       def self.from_json(json)
         json['description'].map(&Description.method(:load))
-       end
+      end
 
       #
       # Loads the problem-type object from parsed JSON.
