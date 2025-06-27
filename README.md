@@ -57,6 +57,6 @@ Copyright (c) 2020-2021 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
-[CVE JSON Schema v4.0]: https://github.com/CVEProject/cve-schema/blob/master/schema/v4.0/DRAFT-JSON-file-format-v4.md
+[CVE JSON Schema v4.0]: https://github.com/CVEProject/cve-schema/blob/main/schema/archive/v4.0/DRAFT-JSON-file-format-v4.md
 
 [ruby]: https://www.ruby-lang.org/
