@@ -9,7 +9,7 @@
 
 ## Description
 
-{CVESchema} provides common classes for CVE data and loading it from JSON.
+[CVESchema] provides common classes for CVE data and loading it from JSON.
 
 ## Features
 
@@ -57,6 +57,7 @@ Copyright (c) 2020-2021 Hal Brodigan
 
 See {file:LICENSE.txt} for details.
 
+[CVESchema]: https://rubydoc.info/gems/cve_schema/CVESchema
 [CVE JSON Schema v4.0]: https://github.com/CVEProject/cve-schema/blob/main/schema/archive/v4.0/DRAFT-JSON-file-format-v4.md
 
 [ruby]: https://www.ruby-lang.org/
